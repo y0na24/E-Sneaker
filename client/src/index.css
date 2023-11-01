@@ -1,3 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind&family=Montserrat:wght@700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+	font-family: 'Hind', sans-serif;
+	@apply text-gray;
+}
+
+.title {
+	@apply text-3xl text-accent font-['Montserrat'];
+}
+
+.text {
+	@apply text-base;
+}

@@ -1,5 +1,7 @@
 import { FC } from 'react'
+import { router } from './routes'
+import { RouterProvider } from 'react-router-dom'
 
 export const App: FC = () => {
-	return <h1>Title</h1>
+	return <RouterProvider router={router} />
 }
