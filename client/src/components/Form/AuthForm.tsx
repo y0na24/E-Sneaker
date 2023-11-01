@@ -18,8 +18,6 @@ interface AuthFormProps {
 export const AuthForm: FC<AuthFormProps> = ({ title }) => {
 	const routerLink = title === 'Login' ? 'signup' : 'login'
 
-	console.log(routerLink)
-
 	return (
 		<Card as='form' className='py-4 w-[475px]'>
 			<CardHeader className='pt-2 px-4 flex items-center gap-1'>

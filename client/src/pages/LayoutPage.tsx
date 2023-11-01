@@ -7,7 +7,9 @@ export const LayoutPage: FC<LayoutPageProps> = ({}) => {
 	return (
 		<>
 			<header>Header</header>
-			<Outlet />
+			<main>
+				<Outlet />
+			</main>
 			<footer>Footer</footer>
 		</>
 	)
