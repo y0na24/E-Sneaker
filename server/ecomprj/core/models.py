@@ -1,25 +1,24 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django_countries.fields import CountryField
+from django.contrib.auth.models import User
 
 
 # Create your models here.
 
 
-class User(AbstractUser):
-    name = models.CharField(max_length=200, null=True)
+class Customer(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
     email = models.EmailField(unique=True, null=True)
     addres = models.CharField(max_length=200)
-
-    avatar = models.ImageField(null=True, default = 'avatar.svg')
+    name = models.CharField(max_length=200)
+    avatar = models.ImageField(null=True, default = 'avatar.svg', blank = True)
     country = CountryField()
     city = models.CharField(max_length=50)
+    number_of_phone = models.IntegerField(default=8)
 
     postcode = models.IntegerField()
 
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
     def __str__(self):
         return self.name
 
@@ -29,7 +28,6 @@ class Product(models.Model):
     CATEGORY_CHOICES = ( 
     ('AB','Amazon Books'),
     ('ONX', 'OnyxBoox'),
-    ('DB','Digma'),
     ('PB','PocketBooks'),
     )
 
@@ -46,7 +44,45 @@ class Product(models.Model):
 class Cart(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=1)
+    quantity = models.PositiveIntegerField(default=0)
+    
+    @property
+    def total_coast(self):
+        return self.quantity * self.product.price
+
+
+
+STATUS_CHOICES = (('Принят','Принят'),('Упакован','Упакован'),('В пути','В пути'),('Доставлен','Доставлен'),('В ожидании','В ожидании'),)
+
+
+
+class WishList(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+
+class OrderPlaced(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=0)
+    ordered_date = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default = 'В ожидании')
+
+
+class Comment(models.Model):
+    product = models.ForeignKey(Product,related_name='comments', on_delete=models.CASCADE)
+    name = models.CharField(max_length=80)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    body = models.TextField()
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created']
+
+    def __str__(self):
+        return self.body
 
 
 
