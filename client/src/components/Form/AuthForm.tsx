@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import {
 	Card,
@@ -10,16 +10,47 @@ import {
 	Button,
 	Link,
 } from '@nextui-org/react'
+import { IInputFields } from '../../lib/models/inputFields.interface'
+import { validateErrors } from '../../lib/helpers/validateErrors'
 
 interface AuthFormProps {
 	title: 'Login' | 'SignUp'
 }
 
 export const AuthForm: FC<AuthFormProps> = ({ title }) => {
+	const [inputFields, setInputFields] = useState<IInputFields>({
+		username: '',
+		password: '',
+	})
+	const [errors, setErrors] = useState<IInputFields | null>()
+
 	const routerLink = title === 'Login' ? 'signup' : 'login'
 
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setInputFields({
+			...inputFields,
+			[e.target.name]: e.target.value,
+		})
+	}
+
+	const hasValidationErrors = () => {
+		const errors = validateErrors(inputFields)
+		setErrors(errors)
+
+		return Object.values(errors).some(field => field !== '')
+	}
+
+	const handleSubmit = (e: React.FormEvent<HTMLDivElement>) => {
+		e.preventDefault()
+
+		if (hasValidationErrors()) return
+
+		setErrors(null)
+		console.log(inputFields)
+	}
+
 	return (
-		<Card as='form' className='py-4 w-[475px]'>
+		<Card onSubmit={handleSubmit} as='form' className='py-4 w-[475px]'>
 			<CardHeader className='pt-2 px-4 flex items-center gap-1'>
 				<h1 className='title'>{title}</h1>
 				<svg
@@ -39,6 +70,7 @@ export const AuthForm: FC<AuthFormProps> = ({ title }) => {
 			</CardHeader>
 			<CardBody className='overflow-visible py-2'>
 				<Input
+					onChange={handleChange}
 					className={'text-gray'}
 					type={'text'}
 					color='primary'
@@ -46,9 +78,14 @@ export const AuthForm: FC<AuthFormProps> = ({ title }) => {
 					size='lg'
 					placeholder='Write your username'
 					label='Username'
+					name='username'
+					isInvalid={!!errors?.username}
+					errorMessage={errors?.username}
+					autoComplete='off'
 				/>
 				<Spacer y={4} />
 				<Input
+					onChange={handleChange}
 					className='text-gray'
 					type='password'
 					color='primary'
@@ -56,7 +93,11 @@ export const AuthForm: FC<AuthFormProps> = ({ title }) => {
 					size='lg'
 					placeholder='Write your password'
 					label='Password'
-				/>
+					name='password'
+					isInvalid={!!errors?.password}
+					errorMessage={errors?.password}
+					autoComplete="off"
+					/>
 			</CardBody>
 			<CardFooter className='p-5 flex items-center justify-between'>
 				<RouterLink to={`/auth/${routerLink}`}>
