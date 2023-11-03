@@ -10,7 +10,7 @@ body {
 }
 
 .title {
-	@apply text-3xl text-accent font-['Montserrat'];
+	@apply text-2xl md:text-3xl text-accent font-['Montserrat'];
 }
 
 .text {

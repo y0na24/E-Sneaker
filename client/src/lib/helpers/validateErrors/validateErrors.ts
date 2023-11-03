@@ -1,4 +1,4 @@
-import { IInputFields } from '../models/inputFields.interface'
+import { IInputFields } from '../../models/inputFields.interface'
 
 export function validateErrors(inputFields: IInputFields) {
 	const { username, password } = inputFields
@@ -16,7 +16,6 @@ export function validateErrors(inputFields: IInputFields) {
 	if (!password.match(passwordRexEx)) {
 		errors.password = 'Password must have at least 8 chars and 1 capital letter'
 	}
-
 
 	return errors
 }

@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
-import { AuthForm } from '../components/Form/AuthForm'
+import { AuthForm } from '../components/AuthForm/AuthForm'
 
 export const AuthPage: FC = () => {
 	const { type } = useParams()

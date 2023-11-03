@@ -1,9 +1,9 @@
-import { Navigate, createBrowserRouter } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { LayoutPage } from './pages/LayoutPage'
 import { AuthPage } from './pages/AuthPage'
 import { ErrorPage } from './pages/ErrorPage'
 
-export const router = createBrowserRouter([
+export const routerConfig = [
 	{
 		path: '/',
 		element: <LayoutPage />,
@@ -19,4 +19,4 @@ export const router = createBrowserRouter([
 			},
 		],
 	},
-])
+]

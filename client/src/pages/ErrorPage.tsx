@@ -2,7 +2,7 @@ import { Button } from '@nextui-org/react'
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export const ErrorPage: FC = ({}) => {
+export const ErrorPage: FC = () => {
 	const navigate = useNavigate()
 
 	return (

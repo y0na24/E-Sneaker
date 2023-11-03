@@ -3,11 +3,11 @@ import { Outlet } from 'react-router-dom'
 
 interface LayoutPageProps {}
 
-export const LayoutPage: FC<LayoutPageProps> = ({}) => {
+export const LayoutPage: FC<LayoutPageProps> = () => {
 	return (
 		<>
 			<header>Header</header>
-			<main>
+			<main className='px-3'>
 				<Outlet />
 			</main>
 			<footer>Footer</footer>
