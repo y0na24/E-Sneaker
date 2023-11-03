@@ -1,7 +1,7 @@
 import { validateErrors } from './validateErrors'
 
 describe('validateErrors module', () => {
-	test('input validation with not correct username', () => {
+	test('input validation with  incorrect username', () => {
 		expect(
 			validateErrors({ username: 'y0na', password: 'Testpassword24' })
 		).toStrictEqual({
@@ -10,7 +10,7 @@ describe('validateErrors module', () => {
 		})
 	})
 
-	test('input validation with not correct password', () => {
+	test('input validation with  incorrect password', () => {
 		expect(
 			validateErrors({ username: 'y0na24', password: 'testpassword' })
 		).toStrictEqual({

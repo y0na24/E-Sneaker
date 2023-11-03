@@ -48,7 +48,11 @@ export const AuthForm: FC<AuthFormProps> = ({ title }) => {
 	return (
 		<Card onSubmit={handleSubmit} as='form' className='py-4 w-[475px]'>
 			<AuthFormHeader title={title} />
-			<AuthFormBody onChange={handleChange} errors={errors as IInputFields} inputFields={inputFields}/>
+			<AuthFormBody
+				onChange={handleChange}
+				errors={errors as IInputFields}
+				inputFields={inputFields}
+			/>
 			<AuthFormFooter redirectionLink={redirectionLink} />
 		</Card>
 	)

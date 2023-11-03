@@ -12,7 +12,11 @@ export const AuthFormFooter: FC<AuthFormFooterProps> = ({
 }) => {
 	return (
 		<CardFooter className='p-5 flex items-center justify-between'>
-			<Link data-testid='form-link' to={`/auth/${redirectionLink}`} className='text-accent underline'>
+			<Link
+				data-testid='form-link'
+				to={`/auth/${redirectionLink}`}
+				className='text-accent underline'
+			>
 				{redirectionLink.toLowerCase() === 'login'
 					? 'Create account'
 					: 'Already have an account?'}
