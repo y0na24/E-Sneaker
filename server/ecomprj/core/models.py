@@ -20,7 +20,7 @@ class Customer(models.Model):
     postcode = models.IntegerField()
 
     def __str__(self):
-        return self.name
+        return "{}{}{}{}{}{}{}".format(self.name, self.email, self.avatar, self.country, self.city, self.number_of_phone, self.postcode)
 
 
 
@@ -39,7 +39,7 @@ class Product(models.Model):
     product_image = models.ImageField(upload_to='product')
 
     def __str__(self):
-        return self.title
+        return "{}{}{}{}{}{}".format(self.title, self.price, self.description, self.category, self.composition, self.product_image)
 
 class Cart(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -49,6 +49,9 @@ class Cart(models.Model):
     @property
     def total_coast(self):
         return self.quantity * self.product.price
+
+    def __str__(self):
+        return "{}{}{}".format(self.product,self.quantity,self.total_coast)
 
 
 
@@ -60,14 +63,11 @@ class WishList(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return '{}{}'.format(self.user.username, self.product)
 
-class OrderPlaced(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=0)
-    ordered_date = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default = 'В ожидании')
+
 
 
 class Comment(models.Model):
@@ -82,7 +82,7 @@ class Comment(models.Model):
         ordering = ['created']
 
     def __str__(self):
-        return self.body
+        return "{}{}{}{}{}{}".format(self.body, self.name, self.user, self.updated, self.created, self.product)
 
 
 

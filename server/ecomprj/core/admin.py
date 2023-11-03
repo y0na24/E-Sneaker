@@ -8,5 +8,5 @@ admin.site.register(Customer)
 admin.site.register(Product)
 admin.site.register(Cart)
 admin.site.register(WishList)
-admin.site.register(OrderPlaced)
+
 admin.site.register(Comment)
