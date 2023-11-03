@@ -6,13 +6,19 @@ import { IInputFields } from '../../lib/models/inputFields.interface'
 interface AuthFormBodyProps {
 	errors: IInputFields | null
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+	inputFields: IInputFields
 }
 
-export const AuthFormBody: FC<AuthFormBodyProps> = ({ onChange, errors }) => {
+export const AuthFormBody: FC<AuthFormBodyProps> = ({
+	onChange,
+	errors,
+	inputFields,
+}) => {
 	return (
 		<CardBody className='overflow-visible py-2'>
 			<Input
 				onChange={onChange}
+				value={inputFields.username}
 				className={'text-gray'}
 				type={'text'}
 				color='primary'
@@ -24,10 +30,12 @@ export const AuthFormBody: FC<AuthFormBodyProps> = ({ onChange, errors }) => {
 				isInvalid={!!errors?.username}
 				errorMessage={errors?.username}
 				autoComplete='off'
+				data-testid='username-input'
 			/>
 			<Spacer y={4} />
 			<Input
 				onChange={onChange}
+				value={inputFields.password}
 				className='text-gray'
 				type='password'
 				color='primary'
@@ -39,6 +47,7 @@ export const AuthFormBody: FC<AuthFormBodyProps> = ({ onChange, errors }) => {
 				isInvalid={!!errors?.password}
 				errorMessage={errors?.password}
 				autoComplete='off'
+				data-testid='password-input'
 			/>
 		</CardBody>
 	)

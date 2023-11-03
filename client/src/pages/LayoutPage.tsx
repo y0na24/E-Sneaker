@@ -1,9 +1,7 @@
 import { FC } from 'react'
 import { Outlet } from 'react-router-dom'
 
-interface LayoutPageProps {}
-
-export const LayoutPage: FC<LayoutPageProps> = () => {
+export const LayoutPage: FC = () => {
 	return (
 		<>
 			<header>Header</header>

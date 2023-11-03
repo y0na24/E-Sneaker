@@ -1,6 +1,5 @@
 import { FC, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Card, CardFooter, Button } from '@nextui-org/react'
+import { Card } from '@nextui-org/react'
 
 import { AuthFormHeader } from './AuthFormHeader'
 
@@ -8,6 +7,7 @@ import { validateErrors } from '../../lib/helpers/validateErrors/validateErrors'
 import { IInputFields } from '../../lib/models/inputFields.interface'
 import { type FormTitle } from '../../lib/models/formTitle.type'
 import { AuthFormBody } from './AuthFormBody'
+import { AuthFormFooter } from './AuthFormFooter'
 
 interface AuthFormProps {
 	title: FormTitle
@@ -20,7 +20,7 @@ export const AuthForm: FC<AuthFormProps> = ({ title }) => {
 	})
 	const [errors, setErrors] = useState<IInputFields | null>()
 
-	const routerLink = title === 'Login' ? 'signup' : 'login'
+	const redirectionLink = title === 'Login' ? 'signup' : 'login'
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setInputFields({
@@ -48,17 +48,8 @@ export const AuthForm: FC<AuthFormProps> = ({ title }) => {
 	return (
 		<Card onSubmit={handleSubmit} as='form' className='py-4 w-[475px]'>
 			<AuthFormHeader title={title} />
-			<AuthFormBody onChange={handleChange} errors={errors as IInputFields} />
-			<CardFooter className='p-5 flex items-center justify-between'>
-				<Link to={`/auth/${routerLink}`} className='text-accent underline'>
-					{routerLink === 'login'
-						? 'Create account'
-						: 'Already have an account?'}
-				</Link>
-				<Button type='submit' color='primary'>
-					{routerLink === 'login' ? 'Sign Up' : 'Login'}
-				</Button>
-			</CardFooter>
+			<AuthFormBody onChange={handleChange} errors={errors as IInputFields} inputFields={inputFields}/>
+			<AuthFormFooter redirectionLink={redirectionLink} />
 		</Card>
 	)
 }
