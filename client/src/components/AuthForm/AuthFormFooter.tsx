@@ -1,7 +1,8 @@
 import { FC } from 'react'
-import { CardFooter, Button } from '@nextui-org/react'
+import { CardFooter } from '@nextui-org/react'
 import { Link } from 'react-router-dom'
 import { type RedirectionLink } from '../../lib/models/redirectionLink.type'
+import { AuthButton } from '../ui/AuthButton'
 
 interface AuthFormFooterProps {
 	redirectionLink: RedirectionLink
@@ -17,13 +18,11 @@ export const AuthFormFooter: FC<AuthFormFooterProps> = ({
 				to={`/auth/${redirectionLink}`}
 				className='text-accent underline'
 			>
-				{redirectionLink.toLowerCase() === 'login'
+				{redirectionLink === 'login'
 					? 'Create account'
 					: 'Already have an account?'}
 			</Link>
-			<Button data-testid='form-btn' type='submit' color='primary'>
-				{redirectionLink.toLowerCase() === 'login' ? 'Sign Up' : 'Login'}
-			</Button>
+			<AuthButton redirectionLink={redirectionLink} />
 		</CardFooter>
 	)
 }
