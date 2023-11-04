@@ -1,14 +1,14 @@
 import { FC } from 'react'
 import { Outlet } from 'react-router-dom'
+import { Header } from '../components/layout/Header'
 
 export const LayoutPage: FC = () => {
 	return (
-		<>
-			<header>Header</header>
-			<main className='px-3'>
+		<div className='wrapper'>
+			<Header />
+			<main className='flex-1'>
 				<Outlet />
 			</main>
-			<footer>Footer</footer>
-		</>
+		</div>
 	)
 }

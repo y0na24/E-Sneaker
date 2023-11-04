@@ -6,7 +6,7 @@ export const AuthPage: FC = () => {
 	const { type } = useParams()
 
 	return (
-		<div className='flex justify-center items-center min-h-screen'>
+		<div className='authPage flex justify-center items-center'>
 			{type === 'login' ? (
 				<AuthForm title='Login' />
 			) : type === 'signup' ? (

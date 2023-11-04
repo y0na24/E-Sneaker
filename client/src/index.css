@@ -16,3 +16,11 @@ body {
 .text {
 	@apply text-base;
 }
+
+.wrapper {
+	@apply min-h-screen flex flex-col mx-auto;
+}
+
+.authPage {
+	min-height: calc(100vh - 65px - 24px);
+}
