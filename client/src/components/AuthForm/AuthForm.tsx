@@ -43,6 +43,7 @@ export const AuthForm: FC<AuthFormProps> = ({ title }) => {
 
 		setErrors(null)
 		console.log(inputFields)
+		console.log('SUBMIT')
 	}
 
 	return (
