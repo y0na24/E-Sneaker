@@ -1,7 +1,10 @@
 name: E-Library CI
 on:
   push:
-    branches: [dev]
+    branches:
+      - dev
+    paths:
+      - client/**
 jobs:
   init:
     runs-on: ubuntu-latest
