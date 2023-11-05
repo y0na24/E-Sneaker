@@ -2,12 +2,12 @@ import { FC, useState } from 'react'
 import { Card } from '@nextui-org/react'
 
 import { AuthFormHeader } from './AuthFormHeader'
+import { AuthFormBody } from './AuthFormBody'
+import { AuthFormFooter } from './AuthFormFooter'
 
 import { validateErrors } from '../../lib/helpers/validateErrors/validateErrors'
 import { IInputFields } from '../../lib/models/inputFields.interface'
 import { type FormTitle } from '../../lib/models/formTitle.type'
-import { AuthFormBody } from './AuthFormBody'
-import { AuthFormFooter } from './AuthFormFooter'
 
 interface AuthFormProps {
 	title: FormTitle

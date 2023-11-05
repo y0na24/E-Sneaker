@@ -2,6 +2,7 @@ import { Navigate } from 'react-router-dom'
 import { LayoutPage } from './pages/LayoutPage'
 import { AuthPage } from './pages/AuthPage'
 import { ErrorPage } from './pages/ErrorPage'
+import { CatalogPage } from './pages/CatalogPage'
 
 export const routerConfig = [
 	{
@@ -16,6 +17,10 @@ export const routerConfig = [
 			{
 				path: '/auth/:type',
 				element: <AuthPage />,
+			},
+			{
+				path: '/catalog',
+				element: <CatalogPage />,
 			},
 		],
 	},

@@ -1,12 +1,13 @@
 import { FC } from 'react'
+import { Link } from 'react-router-dom'
 import {
 	Navbar,
 	NavbarBrand,
 	NavbarContent,
 	NavbarItem,
-	Link,
 	Button,
 } from '@nextui-org/react'
+
 import logo from '../../assets/ebook.png'
 
 export const Header: FC = () => {
@@ -19,8 +20,8 @@ export const Header: FC = () => {
 				</NavbarBrand>
 				<NavbarContent justify='end'>
 					<NavbarItem>
-						<Button as={Link} color='primary' href='#' variant='flat'>
-							Dummy
+						<Button color='primary' variant='flat'>
+							<Link to='/catalog'>Home</Link>
 						</Button>
 					</NavbarItem>
 				</NavbarContent>
