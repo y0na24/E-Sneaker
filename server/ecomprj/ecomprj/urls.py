@@ -21,12 +21,15 @@ from rest_framework import routers
 
 
 router = routers.DefaultRouter()
-router.register(r'api/product',ProductApiView)
-router.register(r'api/cart',CartApiView)
-router.register(r'api/wishlist',WishListApiView)
+router.register(r'api/product',ProductApiView,basename='product')
+router.register(r'api/cart',CartApiView,basename='cart')
+router.register(r'api/wishlist',WishListApiView,basename='wishlist')
+router.register(r'api/comment',CommentApiView,basename='comment')
+router.register(r'api/customer',CustomerApiView,basename='customer')
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include(router.urls))
+    path('core/',include('core.urls')),
 ]

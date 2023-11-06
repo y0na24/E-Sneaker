@@ -1,25 +1,69 @@
-from rest_framework import viewsets
-from django.http import JsonResponse
+from rest_framework import viewsets, status
 from .serializers import  *
 from .models import *
+from rest_framework .views import APIView
+from rest_framework.response import Response
+
+
+class ProductApiView(APIView):
+        def get(self,request):
+
+                obj = Product.objects.all()
+                serializer = ProductSerializer(obj,many=True)
+                return Response(serializer.data,status=status.HTTP_200_OK)
+
+        def post(self,request):
+                serializer = ProductSerializer(data=request.data)
+                if serializer.is_valid():
+                        return Response(serializer.data,status=status.HTTP_201_CREATED)
+                return Response(serializer.data,status=status.HTTP_400_BAD_REQUEST)
+
+
+class CartApiView(APIView):
+        def get(self,request):
+                obj = Cart.objects.all()
+                serializer = CartSerializer(obj,many=True)
+                return Response(serializer.data,status=status.HTTP_200_OK)
+        def post(self,request):
+                serializer = CartSerializer(data=request.data)
+                if serializer.is_valid():
+                        return Response(serializer.data,status=status.HTTP_201_CREATED)
+                return Response(serializer.data,status=status.HTTP_400_BAD_REQUEST)
+
+class WishListApiView(APIView):
+        def get(self,request):
+                obj = WishList.objects.all()
+                serializer = WishListSerializer(obj,many=True)
+                return Response(serializer.data,status=status.HTTP_200_OK)
+        def post(self,request):
+                serializer = WishListSerializer(data=request.data)
+                if serializer.is_valid():
+                        return Response(serializer.data,status=status.HTTP_201_CREATED)
+                return Response(serializer.data,status=status.HTTP_400_BAD_REQUEST)
+
+
+class CustomerApiView(APIView):
+        def get(self,request):
+                obj = Customer.objects.all()
+                serializer = CustomerSerializer(obj,many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+        def post(self,request):
+                serializer = CustomerSerializer(data=request.data)
+                if serializer.is_valid():
+                        serializer_class.save()
+                        return Response(serializer.data, status=status.HTTP_201_CREATED)
+                return Response(serializer.data,status=status.HTTP_400_BAD_REQUEST)
 
 
 
-class ProductApiView(viewsets.ModelViewSet):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    http_method_names = ['get']
-
-
-class CartApiView(viewsets.ModelViewSet):
-        queryset = Cart.objects.all()
-        serializer_class = CartSerializer
-        
-
-class WishListApiView(viewsets.ModelViewSet):
-        queryset = WishList.objects.all()
-        serializer_class = WishListSerializer
-        http_method_names = ['get']
-
-
-
+class CommentApiView(APIView):
+        def get(self,request):
+                obj = Comment.objects.all()
+                serializer = CommentSerializer(obj,many=True)
+                return Response(serializer.dat, status=status.HTTP_200_OK)
+        def post(self, request):
+                serializer = CommentSerializer(data=request.data)
+                if serializer.is_valid():
+                        serializer.save()
+                        return Response(serializer.data, status=status.HTTP_201_CREATED)
+                return Response(serializer.data,status=status.HTTP_400_BAD_REQUEST)

@@ -15,7 +15,7 @@ class Customer(models.Model):
     avatar = models.ImageField(null=True, default = 'avatar.svg', blank = True)
     country = CountryField()
     city = models.CharField(max_length=50)
-    number_of_phone = models.IntegerField(default=8)
+    number_of_phone = models.IntegerField(default=10)
 
     postcode = models.IntegerField()
 
@@ -26,7 +26,7 @@ class Customer(models.Model):
 
 class Product(models.Model):
     CATEGORY_CHOICES = ( 
-    ('AB','Amazon Books'),
+
     ('ONX', 'OnyxBoox'),
     ('PB','PocketBooks'),
     )
@@ -42,7 +42,7 @@ class Product(models.Model):
         return "{}{}{}{}{}{}".format(self.title, self.price, self.description, self.category, self.composition, self.product_image)
 
 class Cart(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.ForeignKey(Customer,on_delete=models.CASCADE)
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=0)
     
