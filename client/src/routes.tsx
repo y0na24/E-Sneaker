@@ -2,7 +2,7 @@ import { Navigate } from 'react-router-dom'
 import { LayoutPage } from './pages/LayoutPage'
 import { AuthPage } from './pages/AuthPage'
 import { ErrorPage } from './pages/ErrorPage'
-import { CatalogPage } from './pages/CatalogPage'
+import { CatalogPage } from './pages/CatalogPage/CatalogPage'
 
 export const routerConfig = [
 	{

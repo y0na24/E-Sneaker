@@ -1,15 +1,19 @@
-import { FC, useEffect, useState } from 'react'
-import { Product } from '../lib/models/product.interface'
-import hasRequiredProductFields from '../lib/helpers/hasRequiredFields/hasRequiredFields'
-import { PRODUCT_FIELDS } from '../lib/constants/productFields'
+import { useState, useEffect } from 'react'
 
-export const CatalogPage: FC = () => {
+import { Product } from '../lib/models/product.interface'
+import { PRODUCT_FIELDS } from '../lib/constants/productFields'
+import hasRequiredProductFields from '../lib/helpers/hasRequiredFields/hasRequiredFields'
+
+export const useProducts = () => {
 	const [products, setProducts] = useState<Product[]>([])
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
 				const res = await fetch('https://798d43654dade824.mokky.dev/products')
+
+				if (!res.ok) throw new Error('Unexpectable error')
+
 				const products = await res.json()
 
 				const hasRequiredFields = products.every((product: Product) =>
@@ -33,15 +37,5 @@ export const CatalogPage: FC = () => {
 		fetchData()
 	}, [])
 
-	//TODO:  make cards with mock data
-	return (
-		<div className='mx-auto px-3 max-w-[1120px]'>
-			<ul>
-				{products &&
-					products.map((product: Product) => (
-						<li key={product.id}>{product.name}</li>
-					))}
-			</ul>
-		</div>
-	)
+	return { products }
 }

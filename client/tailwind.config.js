@@ -12,6 +12,10 @@ export default {
 				accent: '#2563eb',
 				gray: '#71717A',
 			},
+			screens: {
+				'sm': '485px',
+				'md': '700px'
+			}
 		},
 	},
 	darkMode: 'class',
