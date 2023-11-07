@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Card, CardBody, CardFooter, Image } from '@nextui-org/react'
-import { Product } from '../../lib/models/product.interface'
+import { Product } from '../../../lib/models/product.interface'
 
 interface ProductItemProps {
 	product: Product
@@ -9,7 +9,7 @@ interface ProductItemProps {
 export const ProductItem: FC<ProductItemProps> = ({ product }) => {
 	return (
 		<Card
-			data-testid='product-item'
+			data-testid='product-card'
 			as='li'
 			shadow='sm'
 			isPressable
@@ -27,7 +27,9 @@ export const ProductItem: FC<ProductItemProps> = ({ product }) => {
 			</CardBody>
 			<CardFooter className='text-small justify-between'>
 				<b>{product.name.split(' ').slice(0, 1).join(' ')}</b>
-				<p className='text-default-500'>{product.price}</p>
+				<p data-testid='product-price' className='text-default-500'>
+					{product.price}
+				</p>
 			</CardFooter>
 		</Card>
 	)

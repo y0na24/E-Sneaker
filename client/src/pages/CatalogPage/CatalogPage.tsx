@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
-import { ProductList } from '../../components/Products/ProductList'
-import { ProductItem } from '../../components/Products/ProductItem'
+import { ProductList } from '../../components/Products/ProductLIst/ProductList'
+import { ProductItem } from '../../components/Products/ProductItem/ProductItem'
 
 import { useProducts } from '../../hooks/useProducts'
 import { Spinner } from '@nextui-org/react'
@@ -9,6 +9,7 @@ import { Spinner } from '@nextui-org/react'
 export const CatalogPage: FC = () => {
 	const { products } = useProducts()
 
+	//TODO: сделать инпут с поиском по продуктам
 	return (
 		<div className='mx-auto mt-[75px] max-w-[850px]'>
 			{products.length > 0 ? (

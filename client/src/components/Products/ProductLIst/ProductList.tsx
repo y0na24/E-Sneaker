@@ -1,7 +1,7 @@
 import { FC, HTMLAttributes } from 'react'
 
-import { Product } from '../../lib/models/product.interface'
-import { cn } from '../../lib/helpers/cn'
+import { Product } from '../../../lib/models/product.interface'
+import { cn } from '../../../lib/helpers/cn'
 
 interface ProductListProps extends HTMLAttributes<HTMLUListElement> {
 	products: Product[]

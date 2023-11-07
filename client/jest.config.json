@@ -4,5 +4,8 @@
 		"^.+\\.tsx?$": "ts-jest",
 		".+\\.(css|scss|png|jpg|svg)$": "jest-transform-stub"
 	},
+	"testEnvironmentOptions": {
+		"customExportConditions": [""]
+	},
 	"setupFilesAfterEnv": ["<rootDir>/jest-setup.ts"]
 }
