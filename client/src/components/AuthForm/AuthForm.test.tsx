@@ -1,11 +1,10 @@
-import { RouterProvider, createMemoryRouter } from 'react-router-dom'
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent } from '@testing-library/react'
 
 import { AuthFormHeader } from './AuthFormHeader'
 import { AuthFormBody } from './AuthFormBody'
 
 import { renderWithCard } from '../../lib/tests/helpers/renderWithCard'
-import { routerConfig } from '../../routes'
+import { renderWithRouter } from '../../lib/tests/helpers/renderWithRouter'
 
 describe('AuthForm module', () => {
 	test('form header title', () => {
@@ -35,11 +34,8 @@ describe('AuthForm module', () => {
 	})
 
 	test('form footer link and button', async () => {
-		const router = createMemoryRouter(routerConfig, {
-			initialEntries: ['/auth/login'],
-		})
+		const { getByTestId } = renderWithRouter('/auth/login')
 
-		const { getByTestId } = render(<RouterProvider router={router} />)
 		const formBtn = getByTestId('form-btn')
 
 		expect(formBtn).toHaveTextContent('Login')

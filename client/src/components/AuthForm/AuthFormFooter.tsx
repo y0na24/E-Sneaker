@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { CardFooter, Link } from '@nextui-org/react'
 import { Link as RouterLink } from 'react-router-dom'
 import { type RedirectionLink } from '../../lib/models/redirectionLink.type'
-import { AuthButton } from '../ui/AuthButton'
+import { AuthButton } from '../ui/AuthButton/AuthButton'
 
 interface AuthFormFooterProps {
 	redirectionLink: RedirectionLink

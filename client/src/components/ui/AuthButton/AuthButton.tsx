@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Button } from '@nextui-org/react'
-import { type RedirectionLink } from '../../lib/models/redirectionLink.type'
+import { type RedirectionLink } from '../../../lib/models/redirectionLink.type'
 
 interface AuthButtonProps {
 	redirectionLink: RedirectionLink

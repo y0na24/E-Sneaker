@@ -11,7 +11,6 @@ export const CatalogPage: FC = () => {
 	const [value, setValue] = useState('')
 	const { products } = useProducts()
 
-	
 	//TODO: сделать инпут с поиском по продуктам
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setValue(e.target.value)

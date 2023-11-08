@@ -12,7 +12,7 @@ import logo from '../../assets/ebook.png'
 
 export const Header: FC = () => {
 	return (
-		<header>
+		<header data-testid='header'>
 			<Navbar shouldHideOnScroll isBordered>
 				<NavbarBrand className='flex items-center gap-3'>
 					<img src={logo} alt='Logo' width={32} height={32} />
