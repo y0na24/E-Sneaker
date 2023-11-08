@@ -29,7 +29,7 @@ export const useProductsSerivce = () => {
 
 			return products.find(product => product.id === id)
 		},
-		[request, getAllProducts]
+		[getAllProducts]
 	)
 
 	return { getAllProducts, getProductById }
