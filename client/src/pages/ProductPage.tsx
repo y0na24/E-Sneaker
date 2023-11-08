@@ -24,7 +24,7 @@ export const ProductPage: FC<ProductPageProps> = () => {
 		}
 
 		fetchProductById()
-	}, [])
+	}, [productId, getProductById])
 
 	return (
 		<div className='mx-auto max-w-[1000px] flex'>
