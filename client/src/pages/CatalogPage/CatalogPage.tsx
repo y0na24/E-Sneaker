@@ -1,17 +1,29 @@
-import { FC, useState, useRef } from 'react'
-import { Spinner, Input } from '@nextui-org/react'
+import { FC, useState, useRef, useEffect } from 'react'
+import { Input } from '@nextui-org/react'
 import { debounce } from 'lodash'
 
 import { ProductList } from '../../components/Products/ProductLIst/ProductList'
 import { ProductItem } from '../../components/Products/ProductItem/ProductItem'
-
-import { useProducts } from '../../hooks/useProducts'
+import { Product } from '../../lib/models/product.interface'
+import { useProductsSerivce } from '../../services/products.service'
+import { Loader } from '../../components/ui/Loader'
 
 export const CatalogPage: FC = () => {
 	const [value, setValue] = useState('')
-	const { products } = useProducts()
+	const [products, setProducts] = useState<Product[]>([])
 
-	//TODO: сделать инпут с поиском по продуктам
+	const { getAllProducts } = useProductsSerivce()
+
+	useEffect(() => {
+		const fetchAllProducts = async () => {
+			const products = await getAllProducts()
+
+			setProducts(products)
+		}
+
+		fetchAllProducts()
+	}, [])
+
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setValue(e.target.value)
 	}
@@ -42,10 +54,7 @@ export const CatalogPage: FC = () => {
 					/>
 				</div>
 			) : (
-				<Spinner
-					className='absolute top-1/2 left-1/2 -traslate-x-1/2 -traslate-y-1/2'
-					size='lg'
-				/>
+				<Loader />
 			)}
 		</div>
 	)

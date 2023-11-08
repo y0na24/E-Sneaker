@@ -1,37 +1,37 @@
 import { Product } from '../../../lib/models/product.interface'
-import { render } from '@testing-library/react'
-import { ProductList } from './ProductList'
+import { renderWithRouter } from '../../../lib/tests/helpers/renderWithRouter'
 import { ProductItem } from '../ProductItem/ProductItem'
+import { ProductList } from './ProductList'
 
-const products: Product[] = [
+const prodcuts: Product[] = [
 	{
 		name: 'Matvey',
-		id: 24,
-		description: 'some descr',
+		id: '24',
+		description: 'some description',
 		image: 'some image',
-		price: '200',
+		price: '150',
 	},
 	{
 		name: 'Matvey',
-		id: 44,
-		description: 'some descr',
+		id: '34',
+		description: 'some description',
 		image: 'some image',
-		price: '200',
+		price: '150',
 	},
 	{
 		name: 'Matvey',
-		id: 34,
-		description: 'some descr',
+		id: '44',
+		description: 'some description',
 		image: 'some image',
-		price: '200',
+		price: '150',
 	},
 ]
 
 describe('ProductList module', () => {
 	test('productList rendering', () => {
-		const { getByTestId, getAllByTestId } = render(
+		const { getByTestId, getAllByTestId } = renderWithRouter(
 			<ProductList
-				products={products}
+				products={prodcuts}
 				renderProduct={product => (
 					<ProductItem key={product.id} product={product} />
 				)}

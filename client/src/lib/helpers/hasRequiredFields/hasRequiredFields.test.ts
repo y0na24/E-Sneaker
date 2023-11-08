@@ -6,7 +6,7 @@ describe('hasRequiredFields module', () => {
 	test('correct fields from api', () => {
 		const correctObj: Product = {
 			name: 'Matvey',
-			id: 24,
+			id: '24',
 			price: '100',
 			description: 'some text',
 			image: 'imageURL',
@@ -18,7 +18,7 @@ describe('hasRequiredFields module', () => {
 	test('incorrect fields from api', () => {
 		const incorrectObj = {
 			name: 'Matvey',
-			id: 24,
+			id: '24',
 			price: '100',
 			description: 'some text',
 			image: 'imageURL',

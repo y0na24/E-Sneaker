@@ -5,6 +5,7 @@ import { AuthFormBody } from './AuthFormBody'
 
 import { renderWithCard } from '../../lib/tests/helpers/renderWithCard'
 import { renderWithRouter } from '../../lib/tests/helpers/renderWithRouter'
+import { AuthForm } from './AuthForm'
 
 describe('AuthForm module', () => {
 	test('form header title', () => {
@@ -34,7 +35,11 @@ describe('AuthForm module', () => {
 	})
 
 	test('form footer link and button', async () => {
-		const { getByTestId } = renderWithRouter('/auth/login')
+		const { getByTestId } = renderWithRouter(
+			<AuthForm title='Login' />,
+			'/auth/login',
+			{ path: '/auth/signup', element: <AuthForm title='SignUp' /> }
+		)
 
 		const formBtn = getByTestId('form-btn')
 
