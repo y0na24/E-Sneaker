@@ -1,6 +1,8 @@
 import { FC } from 'react'
-import { Card, CardBody, CardFooter, Image } from '@nextui-org/react'
+import { Button, Card, CardBody, CardFooter, Image } from '@nextui-org/react'
+
 import { Product } from '../../../lib/models/product.interface'
+import { Link } from 'react-router-dom'
 
 interface ProductItemProps {
 	product: Product
@@ -12,7 +14,6 @@ export const ProductItem: FC<ProductItemProps> = ({ product }) => {
 			data-testid='product-card'
 			as='li'
 			shadow='sm'
-			isPressable
 			onPress={() => console.log('item pressed')}
 		>
 			<CardBody className='overflow-visible p-0'>
@@ -30,6 +31,11 @@ export const ProductItem: FC<ProductItemProps> = ({ product }) => {
 				<p data-testid='product-price' className='text-default-500'>
 					{product.price}
 				</p>
+			</CardFooter>
+			<CardFooter>
+				<Button className='ml-auto' radius='sm' color='primary'>
+					<Link to={`/catalog/${product.id}`}>Подробнее</Link>
+				</Button>
 			</CardFooter>
 		</Card>
 	)

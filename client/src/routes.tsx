@@ -3,6 +3,7 @@ import { LayoutPage } from './pages/LayoutPage'
 import { AuthPage } from './pages/AuthPage'
 import { ErrorPage } from './pages/ErrorPage'
 import { CatalogPage } from './pages/CatalogPage/CatalogPage'
+import { ProductPage } from './pages/ProductPage'
 
 export const routerConfig = [
 	{
@@ -20,7 +21,16 @@ export const routerConfig = [
 			},
 			{
 				path: '/catalog',
-				element: <CatalogPage />,
+				children: [
+					{
+						index: true,
+						element: <CatalogPage />,
+					},
+					{
+						path: ':productId',
+						element: <ProductPage />,
+					},
+				],
 			},
 		],
 	},
