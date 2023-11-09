@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django_countries',
 ]
 
+
 AUTH_USER_MODEL = 'core.User'
 
 
