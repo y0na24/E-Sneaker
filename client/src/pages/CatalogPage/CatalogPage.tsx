@@ -1,4 +1,4 @@
-import { FC, useState, useRef, useEffect } from 'react'
+import { FC, useState, useEffect, useMemo } from 'react'
 import { Input } from '@nextui-org/react'
 import { debounce } from 'lodash'
 
@@ -25,6 +25,7 @@ export const CatalogPage: FC = () => {
 	}, [getAllProducts])
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		console.log('ок')
 		setValue(e.target.value)
 	}
 
@@ -32,7 +33,9 @@ export const CatalogPage: FC = () => {
 		return product.name.toLowerCase().includes(value.toLowerCase())
 	})
 
-	const handleDebouncedChange = useRef(debounce(handleChange, 300)).current
+	const handleDebouncedChange = useMemo(() => {
+		return debounce(handleChange, 300)
+	}, [])
 
 	return (
 		<div className='mx-auto mt-[60px] max-w-[850px]'>

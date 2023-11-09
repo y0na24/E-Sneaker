@@ -1,14 +1,7 @@
-import { Product } from '../../../lib/models/product.interface'
-import { renderWithRouter } from '../../../lib/tests/helpers/renderWithRouter'
 import { ProductItem } from './ProductItem'
 
-const product: Product = {
-	name: 'Matvey',
-	description: 'some descr',
-	id: '24',
-	image: 'some image',
-	price: '159',
-}
+import { product } from '../../../lib/tests/constants/products'
+import { renderWithRouter } from '../../../lib/tests/helpers/renderWithRouter'
 
 describe('ProductItem module', () => {
 	test('ProductItem component with product prop', () => {
