@@ -28,9 +28,10 @@ class CommentSerializer(serializers.ModelSerializer):
         model = Comment
         fields = '__all__'
 
-class CustomerSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Customer
-        fields = '__all__'
+        model = User
+        fields = ['email','password','first_name']
+
 
         

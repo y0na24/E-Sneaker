@@ -37,9 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-
-    
     'core.apps.CoreConfig',
 
     'rest_framework',
@@ -47,7 +44,7 @@ INSTALLED_APPS = [
     'django_countries',
 ]
 
-
+AUTH_USER_MODEL = 'core.User'
 
 
 
@@ -142,3 +139,6 @@ MEDIA_ROOT = BASE_DIR / 'static/images'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True

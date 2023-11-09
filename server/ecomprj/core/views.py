@@ -12,12 +12,7 @@ class ProductApiView(APIView):
                 serializer = ProductSerializer(obj,many=True)
                 return Response(serializer.data,status=status.HTTP_200_OK)
 
-        def post(self,request):
-                serializer = ProductSerializer(data=request.data)
-                if serializer.is_valid():
-                        return Response(serializer.data,status=status.HTTP_201_CREATED)
-                return Response(serializer.data,status=status.HTTP_400_BAD_REQUEST)
-
+      
 
 class CartApiView(APIView):
         def get(self,request):
@@ -42,13 +37,13 @@ class WishListApiView(APIView):
                 return Response(serializer.data,status=status.HTTP_400_BAD_REQUEST)
 
 
-class CustomerApiView(APIView):
+class UserApiView(APIView):
         def get(self,request):
-                obj = Customer.objects.all()
-                serializer = CustomerSerializer(obj,many=True)
+                obj = User.objects.all()
+                serializer = UserSerializer(obj,many=True)
                 return Response(serializer.data, status=status.HTTP_200_OK)
         def post(self,request):
-                serializer = CustomerSerializer(data=request.data)
+                serializer = UserSerializer(data=request.data)
                 if serializer.is_valid():
                         serializer_class.save()
                         return Response(serializer.data, status=status.HTTP_201_CREATED)

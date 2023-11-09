@@ -1,26 +1,58 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django_countries.fields import CountryField
-from django.contrib.auth.models import User
+from django.contrib.auth import models as auth_models
 
 
 # Create your models here.
 
 
-class Customer(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    email = models.EmailField(unique=True, null=True)
-    addres = models.CharField(max_length=200)
-    name = models.CharField(max_length=200)
-    avatar = models.ImageField(null=True, default = 'avatar.svg', blank = True)
-    country = CountryField()
-    city = models.CharField(max_length=50)
-    number_of_phone = models.IntegerField(default=10)
 
-    postcode = models.IntegerField()
+class UserManager(auth_models.BaseUserManager):
+    def create_user(self,first_name:str,last_name:str,email:str,password:str=None,is_superuser=False,is_staff=False) -> "User":
+        if not email:
+            raise ValueError("Укажите почтовый адрес")
+        if not first_name:
+            raise ValueError("Укажите Ваше имя")
+        if not last_name:
+            raise ValueError("Укажите Вашу фамилию")
+        user = self.model(email=self.normalize_email(email))
+        user.first_name = first_name
+        user.last_name = last_name
+        user.set_password(password)
+        user.is_active = True
+        user.is_staff = is_staff
+        user.is_superuser = is_superuser
+        user.save()
+        return user
 
-    def __str__(self):
-        return "{}{}{}{}{}{}{}".format(self.name, self.email, self.avatar, self.country, self.city, self.number_of_phone, self.postcode)
+    def create_superuser(self,first_name:str,last_name:str,email:str,password:str) -> "User":
+        user = self.create_user(
+            first_name = first_name,
+            last_name = last_name,
+            email = email,
+            password = password,
+            is_staff = True,
+            is_superuser = True
+        )
+        user.save()
+        return user
+
+
+
+class User(auth_models.AbstractUser):
+    first_name = models.CharField(verbose_name='First Name',max_length=255)
+    last_name = models.CharField(verbose_name='Last name',max_length=255)
+    email = models.EmailField(unique=True,max_length=255,verbose_name='Email')
+    password = models.CharField(max_length=255)
+    username = None
+
+    objects = UserManager()
+
+
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["first_name","last_name"]
+
 
 
 
@@ -42,7 +74,7 @@ class Product(models.Model):
         return "{}{}{}{}{}{}".format(self.title, self.price, self.description, self.category, self.composition, self.product_image)
 
 class Cart(models.Model):
-    user = models.ForeignKey(Customer,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=0)
     
@@ -64,7 +96,7 @@ class WishList(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
-        return '{}{}'.format(self.user.username, self.product)
+        return '{}{}'.format(self.user.first_name, self.product)
 
 
 
