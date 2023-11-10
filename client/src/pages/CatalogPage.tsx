@@ -10,6 +10,7 @@ import { Pagination } from '../components/ui/Pagination'
 import { useProductsSerivce } from '../services/products.service'
 
 import { Product } from '../lib/models/product.interface'
+import { paginate } from '../lib/helpers/paginate'
 
 export const CatalogPage: FC = () => {
 	const [value, setValue] = useState('')
@@ -29,19 +30,30 @@ export const CatalogPage: FC = () => {
 	}, [getAllProducts])
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		console.log('ок')
 		setValue(e.target.value)
 	}
 
 	//логика пагинации
-	const productsPerPage = 6
-	const lastProductIndex = currentPage * productsPerPage
-	const firstProductIndex = lastProductIndex - productsPerPage
-	const currentProducts = products.slice(firstProductIndex, lastProductIndex)
 
-	const filteredProducts = currentProducts.filter(product => {
-		return product.name.toLowerCase().includes(value.toLowerCase())
-	})
+	const filterProducts = (products: Product[]) => {
+		const filteredProdcuts = value
+			? products.filter(product =>
+					product.name.toLowerCase().includes(value.toLowerCase())
+			  )
+			: products
+
+		return filteredProdcuts
+	}
+
+	const filteredProducts = filterProducts(products)
+	const productsPerPage = 6
+	const amountOfProducts = filteredProducts.length
+
+	const paginatedProducts = paginate(
+		filteredProducts,
+		currentPage,
+		productsPerPage
+	)
 
 	const handleDebouncedChange = useMemo(() => {
 		return debounce(handleChange, 300)
@@ -62,17 +74,19 @@ export const CatalogPage: FC = () => {
 					/>
 					<ProductList
 						className='mb-4'
-						products={filteredProducts}
+						products={paginatedProducts}
 						renderProduct={product => (
 							<ProductItem key={product.id} product={product} />
 						)}
 					/>
-					<Pagination
-						totalProducts={products.length}
-						productsPerPage={productsPerPage}
-						currentPage={currentPage}
-						setCurrentPage={setCurrentPage}
-					/>
+					{paginatedProducts.length >= productsPerPage && (
+						<Pagination
+							totalProducts={amountOfProducts}
+							productsPerPage={productsPerPage}
+							currentPage={currentPage}
+							setCurrentPage={setCurrentPage}
+						/>
+					)}
 				</div>
 			) : (
 				<Loader />
