@@ -3,17 +3,15 @@ import { useParams } from 'react-router-dom'
 import { Tabs, Tab } from '@nextui-org/react'
 
 import { Loader } from '../components/ui/Loader'
+import { ProductDescription } from '../components/ProductDescription/ProductDescription'
+import { ProductChar } from '../components/ProductChar/ProductChar'
 
 import { useProductsSerivce } from '../services/products.service'
 
 import { Product } from '../lib/models/product.interface'
 import type { TabName } from '../lib/models/tabName.type'
-import { ProductDescription } from '../components/ProductDescription/ProductDescription'
-import { ProductChar } from '../components/ProductChar/ProductChar'
 
-interface ProductPageProps {}
-
-export const ProductPage: FC<ProductPageProps> = () => {
+export const ProductPage: FC = () => {
 	const [product, setProduct] = useState<Product | Record<string, never>>({})
 	const [activeTab, setActiveTab] = useState<TabName>('Описание')
 

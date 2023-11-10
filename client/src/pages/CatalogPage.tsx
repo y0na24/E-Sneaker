@@ -2,15 +2,19 @@ import { FC, useState, useEffect, useMemo } from 'react'
 import { Input } from '@nextui-org/react'
 import { debounce } from 'lodash'
 
-import { ProductList } from '../../components/Products/ProductLIst/ProductList'
-import { ProductItem } from '../../components/Products/ProductItem/ProductItem'
-import { Product } from '../../lib/models/product.interface'
-import { useProductsSerivce } from '../../services/products.service'
-import { Loader } from '../../components/ui/Loader'
+import { ProductList } from '../components/Products/ProductLIst/ProductList'
+import { ProductItem } from '../components/Products/ProductItem/ProductItem'
+import { Loader } from '../components/ui/Loader'
+import { Pagination } from '../components/ui/Pagination'
+
+import { useProductsSerivce } from '../services/products.service'
+
+import { Product } from '../lib/models/product.interface'
 
 export const CatalogPage: FC = () => {
 	const [value, setValue] = useState('')
 	const [products, setProducts] = useState<Product[]>([])
+	const [currentPage, setCurrentPage] = useState(1)
 
 	const { getAllProducts } = useProductsSerivce()
 
@@ -29,7 +33,13 @@ export const CatalogPage: FC = () => {
 		setValue(e.target.value)
 	}
 
-	const filteredProducts = products.filter(product => {
+	//логика пагинации
+	const productsPerPage = 6
+	const lastProductIndex = currentPage * productsPerPage
+	const firstProductIndex = lastProductIndex - productsPerPage
+	const currentProducts = products.slice(firstProductIndex, lastProductIndex)
+
+	const filteredProducts = currentProducts.filter(product => {
 		return product.name.toLowerCase().includes(value.toLowerCase())
 	})
 
@@ -37,6 +47,7 @@ export const CatalogPage: FC = () => {
 		return debounce(handleChange, 300)
 	}, [])
 
+	//TODO: Подумать над декомпозицией и корректной работой фильтрации
 	return (
 		<div className='mx-auto mt-[60px] max-w-[850px]'>
 			{products.length > 0 ? (
@@ -50,10 +61,17 @@ export const CatalogPage: FC = () => {
 						className='max-w-[220px] mb-6 ml-auto'
 					/>
 					<ProductList
+						className='mb-4'
 						products={filteredProducts}
 						renderProduct={product => (
 							<ProductItem key={product.id} product={product} />
 						)}
+					/>
+					<Pagination
+						totalProducts={products.length}
+						productsPerPage={productsPerPage}
+						currentPage={currentPage}
+						setCurrentPage={setCurrentPage}
 					/>
 				</div>
 			) : (

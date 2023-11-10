@@ -18,6 +18,7 @@ export const ProductItem: FC<ProductItemProps> = ({ product }) => {
 		>
 			<CardBody className='overflow-visible p-0'>
 				<Image
+					loading='lazy'
 					shadow='sm'
 					radius='lg'
 					width='100%'
