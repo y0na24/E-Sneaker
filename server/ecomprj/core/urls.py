@@ -11,6 +11,6 @@ urlpatterns = [
     path('api/wishlist',WishListApiView.as_view()),
     path('api/comment',CommentApiView.as_view()),
     path('api/user',UserApiView.as_view()),
-    path('api/register',RegisterApi.as_view()),
+    path('api/register',RegisterApi.as_view(),name='register'),
 
 ]
