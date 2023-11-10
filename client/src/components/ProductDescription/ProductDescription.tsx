@@ -10,7 +10,10 @@ export const ProductDescription: FC<ProductDescriptionProps> = ({
 	product,
 }) => {
 	return (
-		<div className='flex flex-col items-center lg:flex-row lg:items-start gap-5'>
+		<div
+			data-testid='product-description'
+			className='flex flex-col items-center lg:flex-row lg:items-start gap-5'
+		>
 			<Image
 				width={500}
 				height={500}
