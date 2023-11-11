@@ -36,13 +36,11 @@ export const CatalogPage: FC = () => {
 	//логика пагинации
 
 	const filterProducts = (products: Product[]) => {
-		const filteredProdcuts = value
+		return value
 			? products.filter(product =>
 					product.name.toLowerCase().includes(value.toLowerCase())
 			  )
 			: products
-
-		return filteredProdcuts
 	}
 
 	const filteredProducts = filterProducts(products)
@@ -59,7 +57,6 @@ export const CatalogPage: FC = () => {
 		return debounce(handleChange, 300)
 	}, [])
 
-	//TODO: Подумать над декомпозицией и корректной работой фильтрации
 	return (
 		<div className='mx-auto mt-[60px] max-w-[850px]'>
 			{products.length > 0 ? (
