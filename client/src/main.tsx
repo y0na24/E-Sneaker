@@ -1,14 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { App } from './App'
-import './index.css'
-
+import { Provider } from 'react-redux'
 import { NextUIProvider } from '@nextui-org/react'
+
+import { App } from './App'
+
+import { store } from './store/store'
+
+import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
 		<NextUIProvider>
-			<App />
+			<Provider store={store}>
+				<App />
+			</Provider>
 		</NextUIProvider>
 	</React.StrictMode>
 )
