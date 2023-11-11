@@ -6,7 +6,7 @@ import { Loader } from '../components/ui/Loader'
 import { ProductDescription } from '../components/ProductDescription/ProductDescription'
 import { ProductChar } from '../components/ProductChar/ProductChar'
 
-import { useProductsSerivce } from '../services/products.service'
+import { getProductById } from '../db'
 
 import { Product } from '../lib/models/product.interface'
 import type { TabName } from '../lib/models/tabName.type'
@@ -15,7 +15,6 @@ export const ProductPage: FC = () => {
 	const [product, setProduct] = useState<Product | Record<string, never>>({})
 	const [activeTab, setActiveTab] = useState<TabName>('Описание')
 
-	const { getProductById } = useProductsSerivce()
 	const { productId } = useParams()
 
 	useEffect(() => {
@@ -43,7 +42,7 @@ export const ProductPage: FC = () => {
 	}
 
 	return (
-		<div className='mx-auto max-w-[1000px] mt-20'>
+		<div className='mx-auto max-w-[1000px] mt-10'>
 			{Object.keys(product).length > 0 ? (
 				<>
 					<Tabs

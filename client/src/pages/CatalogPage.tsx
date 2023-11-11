@@ -7,7 +7,7 @@ import { ProductItem } from '../components/Products/ProductItem/ProductItem'
 import { Loader } from '../components/ui/Loader'
 import { Pagination } from '../components/ui/Pagination'
 
-import { useProductsSerivce } from '../services/products.service'
+import { getAllProducts } from '../db'
 
 import { Product } from '../lib/models/product.interface'
 import { paginate } from '../lib/helpers/paginate'
@@ -16,8 +16,6 @@ export const CatalogPage: FC = () => {
 	const [value, setValue] = useState('')
 	const [products, setProducts] = useState<Product[]>([])
 	const [currentPage, setCurrentPage] = useState(1)
-
-	const { getAllProducts } = useProductsSerivce()
 
 	useEffect(() => {
 		const fetchAllProducts = async () => {
