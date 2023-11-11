@@ -7,6 +7,6 @@ from . models import *
 admin.site.register(User)
 admin.site.register(Product)
 admin.site.register(Cart)
-admin.site.register(WishList)
+
 
 admin.site.register(Comment)

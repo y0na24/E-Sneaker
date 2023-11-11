@@ -17,25 +17,20 @@ class CartSerializer(serializers.ModelSerializer):
         fields = ['quantity','product','user']
 
 
-class WishListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = WishList
-        fields = ["product","user"]
-
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ['name','body','product','user']
 
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['email','password','first_name']
+        fields = ['email','password','first_name','id']
         extra_kwargs = {
             'password':{'write_only':True}
         }
-
 
     def create(self,validated_data):
         password = validated_data.pop('password',None)
