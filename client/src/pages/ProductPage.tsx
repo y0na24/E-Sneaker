@@ -26,7 +26,7 @@ export const ProductPage: FC = () => {
 		}
 
 		fetchProductById()
-	}, [productId, getProductById])
+	}, [productId])
 
 	const renderContent = (product: Product) => {
 		switch (activeTab) {
