@@ -1,14 +1,18 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Button, Card, CardBody, CardFooter, Image } from '@nextui-org/react'
 
+import { HeartIcon } from '../../ui/HeartIcon'
+
 import { Product } from '../../../lib/models/product.interface'
-import { Link } from 'react-router-dom'
 
 interface ProductItemProps {
 	product: Product
 }
 
 export const ProductItem: FC<ProductItemProps> = ({ product }) => {
+	const [liked, setLiked] = useState(false)
+
 	return (
 		<Card
 			data-testid='product-card'
@@ -33,8 +37,21 @@ export const ProductItem: FC<ProductItemProps> = ({ product }) => {
 					{product.price}
 				</p>
 			</CardFooter>
-			<CardFooter>
-				<Button className='ml-auto' radius='sm' color='primary'>
+			<CardFooter className='justify-between items-center'>
+				<Button
+					isIconOnly
+					className='text-default-900/60 data-[hover]:bg-foreground/10'
+					radius='full'
+					variant='light'
+					onPress={() => setLiked(v => !v)}
+				>
+					<HeartIcon
+						size={30}
+						className={liked ? '[&>path]:stroke-transparent' : ''}
+						fill={liked ? '#2563eb' : 'none'}
+					/>
+				</Button>
+				<Button radius='sm' color='primary'>
 					<Link to={`/catalog/${product.id}`}>Подробнее</Link>
 				</Button>
 			</CardFooter>

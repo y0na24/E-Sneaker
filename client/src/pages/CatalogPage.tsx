@@ -58,7 +58,7 @@ export const CatalogPage: FC = () => {
 	}, [])
 
 	return (
-		<div className='mx-auto mt-[60px] max-w-[850px]'>
+		<div className='mx-auto mt-[40px] max-w-[850px]'>
 			{products.length > 0 ? (
 				<div>
 					<Input
@@ -70,7 +70,7 @@ export const CatalogPage: FC = () => {
 						className='max-w-[220px] mb-6 ml-auto'
 					/>
 					<ProductList
-						className='mb-4'
+						className='mb-6'
 						products={paginatedProducts}
 						renderProduct={product => (
 							<ProductItem key={product.id} product={product} />

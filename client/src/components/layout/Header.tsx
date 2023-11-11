@@ -8,8 +8,9 @@ import {
 	Badge,
 } from '@nextui-org/react'
 
-import logo from '../../assets/ebook.png'
 import { CartIcon } from '../ui/CartIcon'
+
+import logo from '../../assets/ebook.png'
 
 export const Header: FC = () => {
 	return (
