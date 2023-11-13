@@ -11,9 +11,10 @@ import type { FormTitle } from '../../lib/models/formTitle.type'
 
 interface AuthFormProps {
 	title: FormTitle
+	submitForm: (inputFields: IInputFields) => void
 }
 
-export const AuthForm: FC<AuthFormProps> = ({ title }) => {
+export const AuthForm: FC<AuthFormProps> = ({ title, submitForm }) => {
 	const [inputFields, setInputFields] = useState<IInputFields>({
 		email: '',
 		password: '',
@@ -42,8 +43,7 @@ export const AuthForm: FC<AuthFormProps> = ({ title }) => {
 		if (hasValidationErrors()) return
 
 		setErrors(null)
-		console.log(inputFields)
-		console.log('SUBMIT')
+		submitForm(inputFields)
 	}
 
 	return (
