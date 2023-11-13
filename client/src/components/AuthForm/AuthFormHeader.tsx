@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { CardHeader } from '@nextui-org/react'
-import { type FormTitle } from '../../lib/models/formTitle.type'
+import type { FormTitle } from '../../lib/models/formTitle.type'
 
 interface AuthFormHeaderProps {
 	title: FormTitle
