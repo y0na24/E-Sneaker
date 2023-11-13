@@ -1,4 +1,4 @@
-import { FC, Key, useEffect, useState } from 'react'
+import { FC, Key, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Tabs, Tab } from '@nextui-org/react'
 
@@ -6,27 +6,18 @@ import { Loader } from '../components/ui/Loader'
 import { ProductDescription } from '../components/ProductDescription/ProductDescription'
 import { ProductChar } from '../components/ProductChar/ProductChar'
 
-import { getProductById } from '../db'
-
 import { Product } from '../lib/models/product.interface'
 import type { TabName } from '../lib/models/tabName.type'
+import { useGetAllProductsQuery } from '../services/products.service'
 
 export const ProductPage: FC = () => {
-	const [product, setProduct] = useState<Product | Record<string, never>>({})
-	const [activeTab, setActiveTab] = useState<TabName>('Описание')
-
 	const { productId } = useParams()
-
-	useEffect(() => {
-		const fetchProductById = async () => {
-			if (productId) {
-				const product = await getProductById(productId)
-				setProduct(product as Product)
-			}
-		}
-
-		fetchProductById()
-	}, [productId])
+	const [activeTab, setActiveTab] = useState<TabName>('Описание')
+	const { product } = useGetAllProductsQuery(undefined, {
+		selectFromResult: ({ data }) => ({
+			product: data?.find(product => product.id === productId),
+		}),
+	})
 
 	const renderContent = (product: Product) => {
 		switch (activeTab) {
@@ -43,7 +34,7 @@ export const ProductPage: FC = () => {
 
 	return (
 		<div className='mx-auto max-w-[1000px] mt-10'>
-			{Object.keys(product).length > 0 ? (
+			{Object.keys(product as Product).length > 0 ? (
 				<>
 					<Tabs
 						selectedKey={activeTab}
