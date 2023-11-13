@@ -2,10 +2,13 @@ from rest_framework import viewsets, status
 from .serializers import  *
 from .models import *
 from rest_framework.exceptions import AuthenticationFailed
-from rest_framework .views import APIView
+from rest_framework.views import APIView
 from rest_framework.response import Response
 import jwt, datetime
 import json
+from django.contrib.auth import authenticate
+from rest_framework_simplejwt.tokens import RefreshToken
+
 
 
 class ProductApiView(APIView):
@@ -17,11 +20,23 @@ class ProductApiView(APIView):
       
 class RegisterApi(APIView):
         def post(self,request):
-                serializer = UserSerializer(data=request.data)
-                serializer.is_valid(raise_exception=True)
-                serializer.save()
-                return Response(serializer.data)
-
+                try:
+                        data = request.data
+                        serializer = UserSerializer(data=data)
+                        if serializer.is_valid():
+                                serializer.save()
+                                return Response({
+                                        'status':200,
+                                        'message':'registration successfully check your mail',
+                                        'data':serializer.data,
+                                })
+                        return Response({
+                                'status':400,
+                                'message':'Please, check entered data',
+                                'data':serializer.errors,
+                        })
+                except Exception as x:
+                        print(x)
 
 
 class CartApiView(APIView):
@@ -36,17 +51,6 @@ class CartApiView(APIView):
                         return Response(serializer.data,status=status.HTTP_201_CREATED)
                 return Response(serializer.data,status=status.HTTP_400_BAD_REQUEST)
 
-class WishListApiView(APIView):
-        def get(self,request):
-                obj = WishList.objects.all()
-                serializer = WishListSerializer(obj,many=True)
-                return Response(serializer.data,status=status.HTTP_200_OK)
-        def post(self,request):
-                serializer = WishListSerializer(data=request.data)
-                if serializer.is_valid():
-                        serializer.save()
-                        return Response(serializer.data,status=status.HTTP_201_CREATED)
-                return Response(serializer.data,status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserApiView(APIView):
@@ -85,34 +89,33 @@ class CommentApiView(APIView):
 
 class LoginApiView(APIView):
         def post(self,request):
-                email = request.data['email']
-                password = request.data['password']
-                user = User.objects.filter(email=email).first() #Because email is unique
-        
+                try:
+                        data = request.data
+                        serializers = LoginSerializer(data=data)
+                        if serializers.is_valid():
+                                email = serializer.data['email']
+                                password = serializer.data['password']
 
-                if user is None:
-                        raise AuthenticationFailed('User is not found')
+                                user = authenticate(email=email,password=password)
 
-                if not user.check_password(password):
-                        raise AuthenticationFailed('Incorrect password')
-                
+                        if user is None:
+                                return Response({'message':'User does not exist','status':'400','data':'{}'})
+                        
+                        refresh = RefreshToken.for_user(user)
 
-                payload = {
-                'id': user.id,
-                'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=50),
-                'iat': datetime.datetime.utcnow()}
-                token = jwt.encode(payload, 'secret', algorithm='HS256')
-
-                response = Response()
-
-                
-                response.set_cookie(key='jwt',value=token,httponly=True)
-                response.data = {
-                        'jwt':token
-                }
-
-                return response
-
+                        return {
+                                'refresh':str(refresh),
+                                'access':str(refresh.access_token),
+                        }
+                        
+                        return Response({
+                                        'status':400,
+                                        'message':'Check your entered data',
+                                        'data':serializer.errors,
+                                })
+                                
+                except Exception as x:
+                        print(x)
 
 
 

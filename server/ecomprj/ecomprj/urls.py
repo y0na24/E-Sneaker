@@ -23,10 +23,9 @@ from rest_framework import routers
 router = routers.DefaultRouter()
 router.register(r'api/product',ProductApiView,basename='product')
 router.register(r'api/cart',CartApiView,basename='cart')
-router.register(r'api/wishlist',WishListApiView,basename='wishlist')
 router.register(r'api/comment',CommentApiView,basename='comment')
 router.register(r'api/user',UserApiView,basename='user')
-
+router.register(r'api/login',LoginApiView.as_view(),basename='login'),
 
 
 
