@@ -7,7 +7,7 @@ import { AuthFormFooter } from './AuthFormFooter'
 
 import { validateErrors } from '../../lib/helpers/validateErrors/validateErrors'
 import { IInputFields } from '../../lib/models/inputFields.interface'
-import { type FormTitle } from '../../lib/models/formTitle.type'
+import type { FormTitle } from '../../lib/models/formTitle.type'
 
 interface AuthFormProps {
 	title: FormTitle
@@ -15,7 +15,7 @@ interface AuthFormProps {
 
 export const AuthForm: FC<AuthFormProps> = ({ title }) => {
 	const [inputFields, setInputFields] = useState<IInputFields>({
-		username: '',
+		email: '',
 		password: '',
 	})
 	const [errors, setErrors] = useState<IInputFields | null>()
