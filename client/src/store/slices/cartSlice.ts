@@ -33,6 +33,7 @@ export const { toggleProduct } = actions
 export default cartReducer
 
 export const getCartProducuts = (state: RootState) => state.cart.cartList
+export const getCartLength = (state: RootState) => state.cart.cartList.length
 export const isProductInCart = (id: string) => (state: RootState) => {
 	return state.cart.cartList.findIndex(product => product.id === id) !== -1
 }

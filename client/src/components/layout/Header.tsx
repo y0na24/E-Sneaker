@@ -11,8 +11,12 @@ import {
 import { CartIcon } from '../ui/CartIcon'
 
 import logo from '../../assets/ebook.png'
+import { useAppSelector } from '../../hooks/redux'
+import { getCartLength } from '../../store/slices/cartSlice'
 
 export const Header: FC = () => {
+	const cartLength = useAppSelector(getCartLength)
+
 	return (
 		<header data-testid='header'>
 			<Navbar shouldHideOnScroll isBordered>
@@ -25,7 +29,12 @@ export const Header: FC = () => {
 				<NavbarContent justify='end'>
 					<NavbarItem>
 						<Link to='/cart'>
-							<Badge size='sm' color='primary' content={50} shape='circle'>
+							<Badge
+								size='md'
+								color='primary'
+								content={cartLength}
+								shape='circle'
+							>
 								<CartIcon size={30} />
 							</Badge>
 						</Link>

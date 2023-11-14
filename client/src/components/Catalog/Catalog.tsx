@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from 'react'
+import { FC, useEffect, useMemo, useState } from 'react'
 import { debounce } from 'lodash'
 import { Input } from '@nextui-org/react'
 
@@ -22,6 +22,9 @@ export const Catalog: FC<CatalogProps> = ({ products }) => {
 		return debounce(handleChange, 300)
 	}, [])
 
+	useEffect(() => {
+		setCurrentPage(1)
+	}, [value])
 	//логика пагинации
 
 	const filterProducts = (products: Product[]) => {
@@ -40,10 +43,9 @@ export const Catalog: FC<CatalogProps> = ({ products }) => {
 	const productsPerPage = 6
 	const amountOfProducts = filteredProducts.length
 
-	const paginatedProducts = paginate(
-		filteredProducts,
-		currentPage,
-		productsPerPage
+	const paginatedProducts = useMemo(
+		() => paginate(filteredProducts, currentPage, productsPerPage),
+		[filteredProducts, currentPage, productsPerPage]
 	)
 
 	return (
