@@ -1,17 +1,26 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Card, CardBody, CardFooter, Image } from '@nextui-org/react'
 
 import { HeartIcon } from '../../ui/HeartIcon'
 
 import { Product } from '../../../lib/models/product.interface'
+import { isProductInCart, toggleProduct } from '../../../store/slices/cartSlice'
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 
 interface ProductItemProps {
 	product: Product
 }
 
 export const ProductItem: FC<ProductItemProps> = ({ product }) => {
-	const [liked, setLiked] = useState(false)
+	const isProductLiked = useAppSelector(isProductInCart(product.id))
+	const dispatch = useAppDispatch()
+
+	const handleToggleProduct = () => {
+		isProductLiked
+			? dispatch(toggleProduct(product.id))
+			: dispatch(toggleProduct(product))
+	}
 
 	return (
 		<Card
@@ -43,12 +52,12 @@ export const ProductItem: FC<ProductItemProps> = ({ product }) => {
 					className='text-default-900/60 data-[hover]:bg-foreground/10'
 					radius='full'
 					variant='light'
-					onPress={() => setLiked(v => !v)}
+					onPress={handleToggleProduct}
 				>
 					<HeartIcon
 						size={30}
-						className={liked ? '[&>path]:stroke-transparent' : ''}
-						fill={liked ? '#2563eb' : 'none'}
+						className={isProductLiked ? '[&>path]:stroke-transparent' : ''}
+						fill={isProductLiked ? '#2563eb' : 'none'}
 					/>
 				</Button>
 				<Button radius='sm' color='primary'>

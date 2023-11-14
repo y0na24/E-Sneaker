@@ -1,16 +1,16 @@
 import { IInputFields } from '../../models/inputFields.interface'
 
 export function validateErrors(inputFields: IInputFields) {
-	const { username, password } = inputFields
+	const { email, password } = inputFields
 	const passwordRexEx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
 
 	const errors: IInputFields = {
-		username: '',
+		email: '',
 		password: '',
 	}
 
-	if (username.length < 6) {
-		errors.username = 'Username must have at least 8 charachters'
+	if (email.length < 6) {
+		errors.email = 'Email must have at least 6 charachters'
 	}
 
 	if (!password.match(passwordRexEx)) {

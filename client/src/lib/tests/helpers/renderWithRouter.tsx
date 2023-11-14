@@ -5,6 +5,8 @@ import {
 } from 'react-router-dom'
 import { render, RenderOptions } from '@testing-library/react'
 import { ReactElement } from 'react'
+import { Provider } from 'react-redux'
+import { store } from '../../../store/store'
 
 export const renderWithRouter = (
 	component: ReactElement,
@@ -25,5 +27,10 @@ export const renderWithRouter = (
 		{ initialEntries: [path] }
 	)
 
-	return render(<RouterProvider router={router} />, { ...options })
+	return render(
+		<Provider store={store}>
+			<RouterProvider router={router} />
+		</Provider>,
+		{ ...options }
+	)
 }

@@ -1,22 +1,18 @@
 import { FC } from 'react'
-import { useGetAllProductsQuery } from '../services/products.service'
+import { useAppSelector } from '../hooks/redux'
+import { getCartProducuts } from '../store/slices/cartSlice'
 
 export const CartPage: FC = () => {
-	const { data, isLoading, isUninitialized, isError } = useGetAllProductsQuery()
+	const cartProducts = useAppSelector(getCartProducuts)
 
-	if (isLoading || isUninitialized) {
-		return <h1>Loading...</h1>
-	}
-
-	if (isError) {
-		return <h1>Error</h1>
-	}
 	return (
 		<div className='pt-10'>
 			<h1 className='text-center title'>Ваша корзина</h1>
-			{data.map(data => (
-				<li>{data.name}</li>
-			))}
+			<ul>
+				{cartProducts.map(product => (
+					<li>{product.name}</li>
+				))}
+			</ul>
 		</div>
 	)
 }

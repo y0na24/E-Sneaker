@@ -18,8 +18,8 @@ describe('AuthForm module', () => {
 
 	test('form body input value', () => {
 		const onChange = jest.fn()
-		const errors = { username: 'error', password: '' }
-		const inputFields = { username: 'y0na24', password: '' }
+		const errors = { email: 'error', password: '' }
+		const inputFields = { email: 'y0na24', password: '' }
 
 		const { getByTestId } = renderWithCard(
 			<AuthFormBody
@@ -35,10 +35,14 @@ describe('AuthForm module', () => {
 	})
 
 	test('form footer link and button', async () => {
+		const onClick = jest.fn()
 		const { getByTestId } = renderWithRouter(
-			<AuthForm title='Login' />,
+			<AuthForm title='Login' submitForm={onClick} />,
 			'/auth/login',
-			{ path: '/auth/signup', element: <AuthForm title='SignUp' /> }
+			{
+				path: '/auth/signup',
+				element: <AuthForm title='SignUp' submitForm={onClick} />,
+			}
 		)
 
 		const formBtn = getByTestId('form-btn')
