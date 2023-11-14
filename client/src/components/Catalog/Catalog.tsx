@@ -66,7 +66,7 @@ export const Catalog: FC<CatalogProps> = ({ products }) => {
 						<ProductItem key={product.id} product={product} />
 					)}
 				/>
-				{paginatedProducts.length >= productsPerPage && (
+				{filteredProducts.length >= productsPerPage && (
 					<Pagination
 						totalProducts={amountOfProducts}
 						productsPerPage={productsPerPage}
