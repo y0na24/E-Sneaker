@@ -12,8 +12,12 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 
 class ProductApiView(APIView):
+        permission_classes = ()
+        authentication_classes = ()
         def get(self,request):
                 obj = Product.objects.all()
+                permission_classes = ()
+                authentication_classes = ()
                 serializer = ProductSerializer(obj,many=True)
                 return Response(serializer.data,status=status.HTTP_200_OK)
 

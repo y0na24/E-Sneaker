@@ -1,4 +1,4 @@
-from rest_framework import serializers
+from rest_framework import serializers,permissions
 from .models import *
 from drf_extra_fields.fields import Base64ImageField
 
@@ -27,7 +27,7 @@ class CommentSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['email','password','first_name','id']
+        fields = ['email','password','id']
         extra_kwargs = {
             'password':{'write_only':True}
         }
