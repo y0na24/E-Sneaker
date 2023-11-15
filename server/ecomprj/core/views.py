@@ -4,7 +4,7 @@ from .models import *
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.views import APIView
 from rest_framework.response import Response
-import jwt, datetime
+import datetime
 import json
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
