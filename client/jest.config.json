@@ -1,7 +1,11 @@
 {
-  "testEnvironment": "jsdom",
-  "transform": {
-    "^.+\\.tsx?$": "ts-jest"
-  },
-  "setupFilesAfterEnv": ["<rootDir>/jest-setup.ts"]
+	"testEnvironment": "jsdom",
+	"transform": {
+		"^.+\\.tsx?$": "ts-jest",
+		".+\\.(css|scss|png|jpg|svg)$": "jest-transform-stub"
+	},
+	"testEnvironmentOptions": {
+		"customExportConditions": [""]
+	},
+	"setupFilesAfterEnv": ["<rootDir>/jest-setup.ts"]
 }
