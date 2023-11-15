@@ -6,7 +6,7 @@ import { ProductList } from '../Products/ProductLIst/ProductList'
 import { ProductItem } from '../Products/ProductItem/ProductItem'
 import { Pagination } from '../ui/Pagination'
 
-import { paginate } from '../../lib/helpers/paginate'
+import { paginate } from '../../lib/helpers/paginate/paginate'
 
 import { Product } from '../../lib/models/product.interface'
 
@@ -25,7 +25,6 @@ export const Catalog: FC<CatalogProps> = ({ products }) => {
 	useEffect(() => {
 		setCurrentPage(1)
 	}, [value])
-	//логика пагинации
 
 	const filterProducts = (products: Product[]) => {
 		return value
