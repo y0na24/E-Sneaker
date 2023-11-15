@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-!_+(()5andp2b^4=cljwl5e%80oyomi^trc#a4y3rmrpj)5(ud
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://e-library-lac.vercel.app/']
 
 
 # Application definition
