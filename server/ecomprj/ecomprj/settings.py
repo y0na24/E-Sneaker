@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-!_+(()5andp2b^4=cljwl5e%80oyomi^trc#a4y3rmrpj)5(ud
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://e-library-lac.vercel.app/']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -58,7 +58,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'core.middleware.corsMiddleware',
 ]
 
 ROOT_URLCONF = 'ecomprj.urls'
@@ -154,6 +153,10 @@ REST_FRAMEWORK = {
         
     )
 }
+
+
+
+
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
