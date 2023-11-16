@@ -4,7 +4,7 @@ import {
 	createApi,
 	fetchBaseQuery,
 } from '@reduxjs/toolkit/query/react'
-import { logOut, setCredentials } from '../store/slices/authSlice'
+import { authActions } from '../store/slices/authSlice'
 
 const baseQuery = fetchBaseQuery({
 	baseUrl: 'https://e-library-server-zeta.vercel.app/',
@@ -37,13 +37,16 @@ const baseQueryWithReauth = async (
 				const user = api.getState().auth.user
 
 				api.dispatch(
-					setCredentials({ accessToken: refreshResult.data as string, user })
+					authActions.setCredentials({
+						accessToken: refreshResult.data as string,
+						user,
+					})
 				)
 
 				result = await baseQuery(args, api, extraOptions)
 			}
 		} else {
-			api.dispatch(logOut())
+			api.dispatch(authActions.logOut())
 		}
 	}
 

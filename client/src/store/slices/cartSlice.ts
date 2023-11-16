@@ -26,11 +26,9 @@ const cartSlice = createSlice({
 	},
 })
 
-const { reducer: cartReducer, actions } = cartSlice
+export const { reducer: cartReducer, actions: cartActions } = cartSlice
 
-export const { toggleProduct } = actions
 
-export default cartReducer
 
 export const getCartProducuts = (state: RootState) => state.cart.cartList
 export const getCartLength = (state: RootState) => state.cart.cartList.length

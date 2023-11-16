@@ -9,7 +9,6 @@ import { cn } from '../lib/helpers/cn'
 export const CartPage: FC = () => {
 	const cartProducts = useAppSelector(getCartProducuts)
 	const isCartEmpty = cartProducts.length <= 0
-	console.log(isCartEmpty)
 
 	return (
 		<div className='pt-10 mx-auto max-w-[700px]'>

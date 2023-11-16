@@ -4,7 +4,7 @@ import { HeartIcon } from '../ui/HeartIcon'
 import { Product } from '../../lib/models/product.interface'
 
 import { useAppSelector, useAppDispatch } from '../../hooks/redux'
-import { isProductInCart, toggleProduct } from '../../store/slices/cartSlice'
+import { isProductInCart, cartActions } from '../../store/slices/cartSlice'
 
 interface CartItemProps {
 	product: Product
@@ -16,8 +16,8 @@ export const CartItem: FC<CartItemProps> = ({ product }) => {
 
 	const handleToggleProduct = () => {
 		isProductLiked
-			? dispatch(toggleProduct(product.id))
-			: dispatch(toggleProduct(product))
+			? dispatch(cartActions.toggleProduct(product.id))
+			: dispatch(cartActions.toggleProduct(product))
 	}
 
 	return (
