@@ -1,5 +1,5 @@
 import { FC, Key, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import { Tabs, Tab } from '@nextui-org/react'
 
 import { Loader } from '../components/ui/Loader'
@@ -18,6 +18,8 @@ export const ProductPage: FC = () => {
 			product: data?.find(product => product.id === productId),
 		}),
 	})
+
+	if (!product) return
 
 	const renderContent = (product: Product) => {
 		switch (activeTab) {

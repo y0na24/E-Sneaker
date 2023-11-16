@@ -19,6 +19,7 @@ body {
 
 .wrapper {
 	@apply min-h-screen flex flex-col mx-auto;
+	min-height: 100dvh;
 }
 
 .authPage {

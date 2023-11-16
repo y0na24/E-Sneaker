@@ -16,11 +16,22 @@ const cartSlice = createSlice({
 	reducers: {
 		toggleProduct: (state, action: PayloadAction<Product | string>) => {
 			if (typeof action.payload === 'string') {
+				const itemToDelete = state.cartList.find(
+					product => product.id === action.payload
+				)
+
+				if (!itemToDelete) return
+
+				itemToDelete.isInCart = !itemToDelete?.isInCart
+
 				state.cartList = state.cartList.filter(
 					product => product.id !== action.payload
 				)
 			} else {
-				state.cartList.push(action.payload)
+				state.cartList.push({
+					...action.payload,
+					isInCart: true,
+				})
 			}
 		},
 	},

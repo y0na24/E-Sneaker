@@ -1,18 +1,19 @@
 import { FC } from 'react'
 import { Card, Button, Image, CardFooter } from '@nextui-org/react'
-import { HeartIcon } from '../ui/HeartIcon'
-import { Product } from '../../lib/models/product.interface'
+import { cartActions } from '../../store/slices/cartSlice'
 
-import { useAppSelector, useAppDispatch } from '../../hooks/redux'
-import { isProductInCart, cartActions } from '../../store/slices/cartSlice'
+import { HeartIcon } from '../ui/HeartIcon'
+
+import { Product } from '../../lib/models/product.interface'
+import { useAppDispatch } from '../../hooks/redux'
 
 interface CartItemProps {
 	product: Product
 }
 
 export const CartItem: FC<CartItemProps> = ({ product }) => {
-	const isProductLiked = useAppSelector(isProductInCart(product.id))
 	const dispatch = useAppDispatch()
+	const isProductLiked = product.isInCart
 
 	const handleToggleProduct = () => {
 		isProductLiked

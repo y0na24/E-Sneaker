@@ -6,6 +6,7 @@ export const product: Product = {
 	id: '24',
 	image: 'some image',
 	price: '159',
+	isInCart: false,
 }
 
 export const prodcuts: Product[] = [
@@ -15,6 +16,7 @@ export const prodcuts: Product[] = [
 		description: 'some description',
 		image: 'some image',
 		price: '150',
+		isInCart: false,
 	},
 	{
 		name: 'Matvey',
@@ -22,6 +24,7 @@ export const prodcuts: Product[] = [
 		description: 'some description',
 		image: 'some image',
 		price: '150',
+		isInCart: false,
 	},
 	{
 		name: 'Matvey',
@@ -29,5 +32,6 @@ export const prodcuts: Product[] = [
 		description: 'some description',
 		image: 'some image',
 		price: '150',
+		isInCart: false,
 	},
 ]

@@ -4,4 +4,5 @@ export interface Product {
 	description: string
 	image: string
 	price: string
+	isInCart: boolean
 }

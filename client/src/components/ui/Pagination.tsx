@@ -19,7 +19,7 @@ export const Pagination: FC<PaginationProps> = ({
 	const pages = Array(numberOfPages).fill(0)
 
 	return (
-		<div className='flex gap-1'>
+		<div className='flex gap-1 mb-10'>
 			{pages.map((_, index) => (
 				<Button
 					key={index}

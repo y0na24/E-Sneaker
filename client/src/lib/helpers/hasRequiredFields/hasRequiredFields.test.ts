@@ -9,6 +9,7 @@ describe('hasRequiredFields module', () => {
 			id: '24',
 			price: '100',
 			description: 'some text',
+			isInCart: false,
 			image: 'imageURL',
 		}
 
@@ -22,6 +23,7 @@ describe('hasRequiredFields module', () => {
 			price: '100',
 			description: 'some text',
 			image: 'imageURL',
+			isInCart: false,
 			someRandomField: 'fadslkfadslkf',
 		}
 
