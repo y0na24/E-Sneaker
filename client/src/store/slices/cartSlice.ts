@@ -27,11 +27,7 @@ const cartSlice = createSlice({
 })
 
 export const { reducer: cartReducer, actions: cartActions } = cartSlice
-
-
-
-export const getCartProducuts = (state: RootState) => state.cart.cartList
-export const getCartLength = (state: RootState) => state.cart.cartList.length
+//TODO: добавить поле isInCart в объекты, и уже по нему делать тоггл и проверять делать ли активным карточку
 export const isProductInCart = (id: string) => (state: RootState) => {
 	return state.cart.cartList.findIndex(product => product.id === id) !== -1
 }

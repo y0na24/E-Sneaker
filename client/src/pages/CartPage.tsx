@@ -1,13 +1,12 @@
 import { FC } from 'react'
 import { useAppSelector } from '../hooks/redux'
-import { getCartProducuts } from '../store/slices/cartSlice'
 import { ProductList } from '../components/Products/ProductLIst/ProductList'
 import { Spacer } from '@nextui-org/react'
 import { CartItem } from '../components/CartItem/CartItem'
 import { cn } from '../lib/helpers/cn'
 
 export const CartPage: FC = () => {
-	const cartProducts = useAppSelector(getCartProducuts)
+	const cartProducts = useAppSelector(state => state.cart.cartList)
 	const isCartEmpty = cartProducts.length <= 0
 
 	return (
