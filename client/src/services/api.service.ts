@@ -7,7 +7,7 @@ import {
 import { authActions } from '../store/slices/authSlice'
 
 const baseQuery = fetchBaseQuery({
-	baseUrl: 'https://e-library-server-zeta.vercel.app/',
+	baseUrl: 'https://798d43654dade824.mokky.dev/',
 	credentials: 'include',
 	prepareHeaders: (headers: Headers, { getState }: { getState: any }) => {
 		const token = getState().auth.token

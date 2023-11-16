@@ -4,7 +4,7 @@ import { apiService } from './api.service'
 const productService = apiService.injectEndpoints({
 	endpoints: builder => ({
 		getAllProducts: builder.query<Product[], void>({
-			query: () => 'product',
+			query: () => 'products',
 		}),
 	}),
 })
