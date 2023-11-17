@@ -33,6 +33,25 @@ const cartSlice = createSlice({
 					isInCart: true,
 				})
 			}
+
+			// if (action.payload.isInCart) {
+			// 	const itemToDelete = state.cartList.find(
+			// 		product => product.id === action.payload.id
+			// 	)
+
+			// 	if (!itemToDelete) return
+
+			// 	itemToDelete.isInCart = !itemToDelete?.isInCart
+
+			// 	state.cartList = state.cartList.filter(
+			// 		product => product.id !== action.payload.id
+			// 	)
+			// } else {
+			// 	state.cartList.push({
+			// 		...action.payload,
+			// 		isInCart: true,
+			// 	})
+			// }
 		},
 	},
 })

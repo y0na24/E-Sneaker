@@ -1,5 +1,5 @@
 import { FC, Key, useState } from 'react'
-import { Navigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { Tabs, Tab } from '@nextui-org/react'
 
 import { Loader } from '../components/ui/Loader'
