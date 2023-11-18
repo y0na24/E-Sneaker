@@ -4,9 +4,26 @@ import { ProductList } from '../components/Products/ProductLIst/ProductList'
 import { Spacer } from '@nextui-org/react'
 import { CartItem } from '../components/CartItem/CartItem'
 import { cn } from '../lib/helpers/cn'
+import { Loader } from '../components/ui/Loader'
+import { Navigate } from 'react-router-dom'
+import { useGetCartQuery } from '../services/cart.service'
 
 export const CartPage: FC = () => {
-	const cartProducts = useAppSelector(state => state.cart.cartList)
+	const {
+		data: cartProducts,
+		isLoading,
+		isUninitialized,
+		isError,
+	} = useGetCartQuery()
+
+	if (isLoading || isUninitialized) {
+		return <Loader />
+	}
+
+	if (isError) {
+		return <Navigate to='*' />
+	}
+
 	const isCartEmpty = cartProducts.length <= 0
 
 	return (

@@ -7,14 +7,18 @@ import {
 	NavbarItem,
 	Badge,
 } from '@nextui-org/react'
-import { useAppSelector } from '../../hooks/redux'
 
 import { CartIcon } from '../ui/CartIcon'
 
 import logo from '../../assets/sneaker.png'
+import { useGetCartQuery } from '../../services/cart.service'
 
 export const Header: FC = () => {
-	const cartLength = useAppSelector(state => state.cart.cartList.length)
+	const { cartLength } = useGetCartQuery(undefined, {
+		selectFromResult: ({ data }) => ({
+			cartLength: data?.length,
+		}),
+	})
 
 	return (
 		<header data-testid='header'>

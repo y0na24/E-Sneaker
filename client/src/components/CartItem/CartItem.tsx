@@ -1,24 +1,32 @@
 import { FC } from 'react'
 import { Card, Button, Image, CardFooter } from '@nextui-org/react'
-import { cartActions } from '../../store/slices/cartSlice'
-
 import { HeartIcon } from '../ui/HeartIcon'
-
 import { Product } from '../../lib/models/product.interface'
-import { useAppDispatch } from '../../hooks/redux'
+
+import {
+	useAddProductToCartMutation,
+	useDeleteProductFromCartMutation,
+} from '../../services/cart.service'
 
 interface CartItemProps {
 	product: Product
 }
 
 export const CartItem: FC<CartItemProps> = ({ product }) => {
-	const dispatch = useAppDispatch()
+	const [addProductToCart, {}] = useAddProductToCartMutation()
+	const [deleteProductFromCart, {}] = useDeleteProductFromCartMutation()
 	const isProductLiked = product.isInCart
 
 	const handleToggleProduct = () => {
 		isProductLiked
-			? dispatch(cartActions.toggleProduct(product.id))
-			: dispatch(cartActions.toggleProduct(product))
+			? deleteProductFromCart(product.id)
+			: addProductToCart({
+					description: product.description,
+					image: product.image,
+					isInCart: product.isInCart,
+					name: product.name,
+					price: product.price,
+			  } as Product)
 	}
 
 	return (

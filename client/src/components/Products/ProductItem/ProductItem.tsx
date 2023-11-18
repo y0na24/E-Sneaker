@@ -5,21 +5,38 @@ import { Button, Card, CardBody, CardFooter, Image } from '@nextui-org/react'
 import { HeartIcon } from '../../ui/HeartIcon'
 
 import { Product } from '../../../lib/models/product.interface'
-import { isProductInCart, cartActions } from '../../../store/slices/cartSlice'
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
+import { isProductInCart } from '../../../store/slices/cartSlice'
+import { useAppSelector } from '../../../hooks/redux'
+import {
+	useAddProductToCartMutation,
+	useDeleteProductFromCartMutation,
+} from '../../../services/cart.service'
+import { useGetCartQuery } from '../../../services/cart.service'
 
 interface ProductItemProps {
 	product: Product
 }
 
 export const ProductItem: FC<ProductItemProps> = ({ product }) => {
-	const isProductLiked = useAppSelector(isProductInCart(product.id))
-	const dispatch = useAppDispatch()
+	const { isProductLiked } = useGetCartQuery(undefined, {
+		selectFromResult: ({ data }) => ({
+			isProductLiked:
+				data?.findIndex(item => item.name === product.name) !== -1,
+		}),
+	})
+	const [addProductToCart, {}] = useAddProductToCartMutation()
+	const [deleteProductFromCart, {}] = useDeleteProductFromCartMutation()
 
 	const handleToggleProduct = () => {
 		isProductLiked
-			? dispatch(cartActions.toggleProduct(product.id))
-			: dispatch(cartActions.toggleProduct(product))
+			? deleteProductFromCart(product.id)
+			: addProductToCart({
+					description: product.description,
+					image: product.image,
+					isInCart: true,
+					name: product.name,
+					price: product.price,
+			  } as Product)
 	}
 
 	return (
