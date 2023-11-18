@@ -7,7 +7,7 @@ import {
 import { authActions } from '../store/slices/authSlice'
 
 const baseQuery = fetchBaseQuery({
-	baseUrl: 'https://798d43654dade824.mokky.dev/',
+	baseUrl: 'http://localhost:3000/',
 	credentials: 'include',
 	prepareHeaders: (headers: Headers, { getState }: { getState: any }) => {
 		const token = getState().auth.token
