@@ -36,14 +36,14 @@ export const ProductItem: FC<ProductItemProps> = ({ product }) => {
 					radius='lg'
 					width='100%'
 					alt={product.name}
-					className='w-full object-cover h-[140px]'
+					className='w-full object-cover h-[170px]'
 					src={product.image}
 				/>
 			</CardBody>
 			<CardFooter className='text-small justify-between'>
-				<b>{product.name.split(' ').slice(0, 1).join(' ')}</b>
+				<b>{product.name}</b>
 				<p data-testid='product-price' className='text-default-500'>
-					{product.price}
+					${product.price}
 				</p>
 			</CardFooter>
 			<CardFooter className='justify-between items-center'>
@@ -61,7 +61,7 @@ export const ProductItem: FC<ProductItemProps> = ({ product }) => {
 					/>
 				</Button>
 				<Button radius='sm' color='primary'>
-					<Link to={`/catalog/${product.id}`}>Подробнее</Link>
+					<Link to={`/catalog/${product.id}`}>Details</Link>
 				</Button>
 			</CardFooter>
 		</Card>

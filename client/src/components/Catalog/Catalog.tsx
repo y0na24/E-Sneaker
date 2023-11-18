@@ -52,10 +52,10 @@ export const Catalog: FC<CatalogProps> = ({ products }) => {
 			<div>
 				<Input
 					onChange={handleDebouncedChange}
-					type='email'
+					type='text'
 					color='primary'
-					label='Модель'
-					placeholder='Название модели'
+					label='Model'
+					placeholder='Write the name'
 					className='max-w-[220px] mb-6 ml-auto'
 				/>
 				<ProductList

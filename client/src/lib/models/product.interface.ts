@@ -1,8 +1,8 @@
 export interface Product {
-	id: string
+	id: number
 	name: string
 	description: string
 	image: string
-	price: string
+	price: number
 	isInCart: boolean
 }

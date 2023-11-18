@@ -35,7 +35,7 @@ export const ProductComments: FC<ProductCommentsProps> = () => {
 					))}
 				</ul>
 			) : (
-				<h2 className='w-1/2'>Комментариев нету</h2>
+				<h2 className='w-1/2'>No comments</h2>
 			)}
 			<div className='flex flex-col w-1/2'>
 				<Textarea
@@ -44,10 +44,10 @@ export const ProductComments: FC<ProductCommentsProps> = () => {
 					className='text mb-3'
 					variant='bordered'
 					color='primary'
-					placeholder='Напиши комментарий...'
+					placeholder='Write the comment...'
 				/>
 				<Button type='submit' className='ml-auto' color='primary'>
-					Добавить
+					Add
 				</Button>
 			</div>
 		</form>

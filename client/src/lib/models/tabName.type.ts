@@ -1,1 +1,1 @@
-export type TabName = 'Описание' | 'Характеристика'
+export type TabName = 'Description' | 'Сharacteristic'

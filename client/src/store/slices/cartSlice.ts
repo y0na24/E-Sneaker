@@ -14,8 +14,8 @@ const cartSlice = createSlice({
 	name: 'cart',
 	initialState,
 	reducers: {
-		toggleProduct: (state, action: PayloadAction<Product | string>) => {
-			if (typeof action.payload === 'string') {
+		toggleProduct: (state, action: PayloadAction<Product | number>) => {
+			if (typeof action.payload === 'number') {
 				const itemToDelete = state.cartList.find(
 					product => product.id === action.payload
 				)
@@ -57,6 +57,6 @@ const cartSlice = createSlice({
 })
 
 export const { reducer: cartReducer, actions: cartActions } = cartSlice
-export const isProductInCart = (id: string) => (state: RootState) => {
+export const isProductInCart = (id: number) => (state: RootState) => {
 	return state.cart.cartList.findIndex(product => product.id === id) !== -1
 }

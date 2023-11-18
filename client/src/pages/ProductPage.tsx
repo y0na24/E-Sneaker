@@ -12,10 +12,10 @@ import { useGetAllProductsQuery } from '../services/products.service'
 
 export const ProductPage: FC = () => {
 	const { productId } = useParams()
-	const [activeTab, setActiveTab] = useState<TabName>('Описание')
+	const [activeTab, setActiveTab] = useState<TabName>('Description')
 	const { product } = useGetAllProductsQuery(undefined, {
 		selectFromResult: ({ data }) => ({
-			product: data?.find(product => product.id === productId),
+			product: data?.find(product => product.id === Number(productId)),
 		}),
 	})
 
@@ -23,10 +23,10 @@ export const ProductPage: FC = () => {
 
 	const renderContent = (product: Product) => {
 		switch (activeTab) {
-			case 'Описание':
+			case 'Description':
 				return <ProductDescription product={product} />
 
-			case 'Характеристика':
+			case 'Сharacteristic':
 				return <ProductChar product={product} />
 
 			default:
@@ -46,8 +46,8 @@ export const ProductPage: FC = () => {
 						aria-label='Tabs colors'
 						radius='full'
 					>
-						<Tab key='Описание' title='Описание' />
-						<Tab key='Характеристика' title='Характеристика' />
+						<Tab key='Description' title='Description' />
+						<Tab key='Сharacteristic' title='Сharacteristic' />
 					</Tabs>
 					{renderContent(product as Product)}
 				</>

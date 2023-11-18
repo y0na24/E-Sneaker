@@ -16,7 +16,7 @@ export const CartPage: FC = () => {
 					'!text-red-600': isCartEmpty,
 				})}
 			>
-				{isCartEmpty ? 'Пусто' : 'Ваша корзина'}
+				{isCartEmpty ? 'Your cart is empty' : 'Your cart'}
 			</h1>
 			<Spacer y={5} />
 			<ProductList

@@ -11,7 +11,7 @@ import { useAppSelector } from '../../hooks/redux'
 
 import { CartIcon } from '../ui/CartIcon'
 
-import logo from '../../assets/ebook.png'
+import logo from '../../assets/sneaker.png'
 
 export const Header: FC = () => {
 	const cartLength = useAppSelector(state => state.cart.cartList.length)
@@ -22,7 +22,7 @@ export const Header: FC = () => {
 				<NavbarBrand>
 					<Link className='flex items-center gap-3' to='/catalog'>
 						<img src={logo} alt='Logo' width={32} height={32} />
-						<p className='font-bold text-inherit'>E-LIBRARY</p>
+						<p className='font-bold text-inherit'>E-SNEAKER</p>
 					</Link>
 				</NavbarBrand>
 				<NavbarContent justify='end'>
