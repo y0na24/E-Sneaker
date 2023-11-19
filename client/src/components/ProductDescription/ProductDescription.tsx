@@ -28,7 +28,7 @@ export const ProductDescription: FC<ProductDescriptionProps> = ({
 					<p className='text'>{product.description}</p>
 				</div>
 			</div>
-			<ProductComments />
+			<ProductComments productId={product.id} />
 		</>
 	)
 }

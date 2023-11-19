@@ -18,18 +18,19 @@ interface ProductItemProps {
 }
 
 export const ProductItem: FC<ProductItemProps> = ({ product }) => {
-	const { isProductLiked } = useGetCartQuery(undefined, {
+	const { cartItem } = useGetCartQuery(undefined, {
 		selectFromResult: ({ data }) => ({
-			isProductLiked:
-				data?.findIndex(item => item.name === product.name) !== -1,
+			cartItem: data?.find(item => item.name === product.name),
 		}),
 	})
+	const isProductLiked = cartItem?.isInCart
+
 	const [addProductToCart, {}] = useAddProductToCartMutation()
 	const [deleteProductFromCart, {}] = useDeleteProductFromCartMutation()
 
 	const handleToggleProduct = () => {
 		isProductLiked
-			? deleteProductFromCart(product.id)
+			? deleteProductFromCart(cartItem.id)
 			: addProductToCart({
 					description: product.description,
 					image: product.image,

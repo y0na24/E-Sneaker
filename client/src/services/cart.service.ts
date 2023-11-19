@@ -1,5 +1,4 @@
 import { Product } from '../lib/models/product.interface'
-import { cartActions } from '../store/slices/cartSlice'
 import { apiService } from './api.service'
 
 const productService = apiService
@@ -19,7 +18,6 @@ const productService = apiService
 					body: product,
 				}),
 				invalidatesTags: ['Cart'],
-				
 			}),
 			deleteProductFromCart: builder.mutation<void, number>({
 				query: id => ({
@@ -27,7 +25,6 @@ const productService = apiService
 					method: 'DELETE',
 				}),
 				invalidatesTags: ['Cart'],
-				
 			}),
 		}),
 	})
