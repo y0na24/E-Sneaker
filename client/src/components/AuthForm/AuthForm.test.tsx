@@ -18,8 +18,8 @@ describe('AuthForm module', () => {
 
 	test('form body input value', () => {
 		const onChange = jest.fn()
-		const errors = { email: 'error', password: '' }
-		const inputFields = { email: 'y0na24', password: '' }
+		const errors = { username: 'error', password: '' }
+		const inputFields = { username: 'y0na24', password: '' }
 
 		const { getByTestId } = renderWithCard(
 			<AuthFormBody

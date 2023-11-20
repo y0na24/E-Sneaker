@@ -1,32 +1,46 @@
 import { FC } from 'react'
-import { Navigate, useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
 import { AuthForm } from '../components/AuthForm/AuthForm'
 import { IInputFields } from '../lib/models/inputFields.interface'
-import { useLoginMutation } from '../services/auth.service'
-import { useAppDispatch } from '../hooks/redux'
-import { authActions } from '../store/slices/authSlice'
+import { useAuthMutation, useRegisterMutation } from '../services/auth.service'
+import { useAppSelector } from '../hooks/redux'
 
 export const AuthPage: FC = () => {
-	const dispatch = useAppDispatch()
 	const { type } = useParams()
-	const [login] = useLoginMutation()
+	const navigate = useNavigate()
+	const [register] = useRegisterMutation()
+	const [auth] = useAuthMutation()
+	const isLoggedIn = useAppSelector(state => state.auth.token)
 
-	const submitLogin = async (inputFields: IInputFields) => {
+	if (isLoggedIn) {
+		return <Navigate to='/catalog' />
+	}
+
+	const submitRegister = async (inputFields: IInputFields) => {
 		try {
-			const accessToken = await login(inputFields).unwrap()
-			dispatch(authActions.setCredentials({ user: inputFields, accessToken }))
+			await register(inputFields).unwrap()
+			navigate('/catalog')
 		} catch (err) {
-			console.log(err)
+			console.log('Ошибка с компоненте AuthPage при регистрации')
+		}
+	}
+
+	const submitAuth = async (inputFields: IInputFields) => {
+		try {
+			await auth(inputFields).unwrap()
+			navigate('/catalog')
+		} catch (err) {
+			console.log('Ошибка с компоненте AuthPage при регистрации')
 		}
 	}
 
 	return (
 		<div className='authPage flex justify-center items-center'>
 			{type === 'login' ? (
-				<AuthForm title='Login' submitForm={submitLogin} />
+				<AuthForm title='Login' submitForm={submitRegister} />
 			) : type === 'signup' ? (
-				<AuthForm title='SignUp' submitForm={submitLogin} />
+				<AuthForm title='SignUp' submitForm={submitAuth} />
 			) : (
 				<Navigate to='*' />
 			)}

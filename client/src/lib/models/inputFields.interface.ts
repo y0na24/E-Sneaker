@@ -1,4 +1,4 @@
 export interface IInputFields {
-	email: string
+	username: string
 	password: string
 }

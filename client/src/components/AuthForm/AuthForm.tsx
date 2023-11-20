@@ -14,11 +14,13 @@ interface AuthFormProps {
 	submitForm: (inputFields: IInputFields) => void
 }
 
+const initialValue = {
+	username: '',
+	password: '',
+}
+
 export const AuthForm: FC<AuthFormProps> = ({ title, submitForm }) => {
-	const [inputFields, setInputFields] = useState<IInputFields>({
-		email: '',
-		password: '',
-	})
+	const [inputFields, setInputFields] = useState<IInputFields>(initialValue)
 	const [errors, setErrors] = useState<IInputFields | null>()
 
 	const redirectionLink = title === 'Login' ? 'signup' : 'login'
@@ -43,6 +45,7 @@ export const AuthForm: FC<AuthFormProps> = ({ title, submitForm }) => {
 		if (hasValidationErrors()) return
 
 		setErrors(null)
+		setInputFields(initialValue)
 		submitForm(inputFields)
 	}
 

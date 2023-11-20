@@ -4,6 +4,8 @@ import { Loader } from '../components/ui/Loader'
 import { Catalog } from '../components/Catalog/Catalog'
 
 import { useGetAllProductsQuery } from '../services/products.service'
+import { useAppSelector } from '../hooks/redux'
+import { Navigate } from 'react-router-dom'
 
 export const CatalogPage: FC = () => {
 	const {
@@ -12,6 +14,11 @@ export const CatalogPage: FC = () => {
 		isUninitialized,
 		isError,
 	} = useGetAllProductsQuery()
+	const isLoggedIn = useAppSelector(state => state.auth.token)
+
+	if (!isLoggedIn) {
+		return <Navigate to={'/'} />
+	}
 
 	if (isLoading || isUninitialized) {
 		return <Loader />

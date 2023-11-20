@@ -18,17 +18,17 @@ export const AuthFormBody: FC<AuthFormBodyProps> = ({
 		<CardBody className='overflow-visible py-2'>
 			<Input
 				onChange={onChange}
-				value={inputFields.email}
+				value={inputFields.username}
 				className={'text-gray'}
 				type={'text'}
 				color='primary'
 				variant='bordered'
 				size='lg'
-				placeholder='Write your email'
-				label='Email'
-				name='email'
-				isInvalid={!!errors?.email}
-				errorMessage={errors?.email}
+				placeholder='Write your username'
+				label='Username'
+				name='username'
+				isInvalid={!!errors?.username}
+				errorMessage={errors?.username}
 				autoComplete='off'
 				data-testid='username-input'
 			/>

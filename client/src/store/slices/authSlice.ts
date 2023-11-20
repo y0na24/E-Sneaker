@@ -1,31 +1,37 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { IInputFields } from '../../lib/models/inputFields.interface'
+import { User, UserData } from '../../lib/models/user.interface'
 
 interface AuthSliceState {
-	user: IInputFields | null
+	user: UserData | null
 	token: string | null
 }
 
+const user = JSON.parse(localStorage.getItem('user') as string) || null
+const token = JSON.parse(localStorage.getItem('token') as string) || null
+
 const initialState: AuthSliceState = {
-	user: null,
-	token: null,
+	user: user,
+	token: token,
 }
 
 const authSlice = createSlice({
 	name: 'auth',
 	initialState,
 	reducers: {
-		setCredentials: (
-			state,
-			action: PayloadAction<{ user: IInputFields; accessToken: string }>
-		) => {
-			const { user, accessToken } = action.payload
-			state.user = user
-			state.token = accessToken
+		setCredentials: (state, action: PayloadAction<User>) => {
+			const { data, token } = action.payload
+			state.user = { ...data }
+			state.token = token
+
+			localStorage.setItem('user', JSON.stringify(state.user))
+			localStorage.setItem('token', JSON.stringify(state.token))
 		},
 		logOut: state => {
 			state.user = null
 			state.token = null
+
+			localStorage.removeItem('user')
+			localStorage.removeItem('token')
 		},
 	},
 })

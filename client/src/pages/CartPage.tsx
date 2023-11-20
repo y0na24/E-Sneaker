@@ -15,6 +15,11 @@ export const CartPage: FC = () => {
 		isUninitialized,
 		isError,
 	} = useGetCartQuery()
+	const isLoggedIn = useAppSelector(state => state.auth.token)
+
+	if (!isLoggedIn) {
+		return <Navigate to={'/'} />
+	}
 
 	if (isLoading || isUninitialized) {
 		return <Loader />
