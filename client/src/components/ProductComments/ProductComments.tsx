@@ -51,13 +51,16 @@ export const ProductComments: FC<ProductCommentsProps> = ({ productId }) => {
 	}
 
 	return (
-		<form className='flex gap-5' onSubmit={handleAddComment}>
+		<form
+			className='flex-col-reverse items-center lg:items-baseline lg:flex-row flex lg:gap-5'
+			onSubmit={handleAddComment}
+		>
 			{comments.length > 0 ? (
 				<ul className='w-1/2 flex flex-col gap-4 p-2 overflow-y-auto h-[300px]'>
 					{comments.map(comment => (
 						<li
 							key={comment.id}
-							className='w-[90%] relative rounded-md  break-all border-2 border-[#E4E4E7] px-6 py-2'
+							className='w-full lg:w-[90%] relative rounded-md  break-all border-2 border-[#E4E4E7] px-6 py-2'
 						>
 							<p className='inline-block'>{comment.text}</p>
 							<img
@@ -72,9 +75,11 @@ export const ProductComments: FC<ProductCommentsProps> = ({ productId }) => {
 					))}
 				</ul>
 			) : (
-				<h2 className='w-1/2'>No comments</h2>
+				<h2 className='w-full mb-10 max-w-[500px] lg:mb-0 lg:w-1/2'>
+					No comments
+				</h2>
 			)}
-			<div className='flex flex-col w-1/2'>
+			<div className='flex flex-col w-full max-w-[500px] lg:w-1/2 mb-10'>
 				<Textarea
 					value={value}
 					onChange={e => setValue(e.target.value)}

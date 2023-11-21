@@ -14,12 +14,12 @@ export const ProductDescription: FC<ProductDescriptionProps> = ({
 		<>
 			<div
 				data-testid='product-description'
-				className='flex flex-col items-center lg:flex-row lg:items-start gap-5 mb-20'
+				className='flex flex-col items-center lg:flex-row lg:items-start mb-10 lg:gap-5 lg:mb-20'
 			>
 				<Image
 					width={500}
 					height={500}
-					className='min-w-[320px] md:min-w-[400px]'
+					className='min-w-[320px] mb-5 lg:mb-0 md:min-w-[400px]'
 					src={product.image}
 					alt='Электронная книга'
 				/>
