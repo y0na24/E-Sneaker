@@ -5,12 +5,12 @@ import { Button, Card, CardBody, CardFooter, Image } from '@nextui-org/react'
 import { HeartIcon } from '../../ui/HeartIcon'
 
 import { Product } from '../../../lib/models/product.interface'
-import { isProductInCart } from '../../../store/slices/cartSlice'
-import { useAppSelector } from '../../../hooks/redux'
+
 import {
 	useAddProductToCartMutation,
 	useDeleteProductFromCartMutation,
 } from '../../../services/cart.service'
+
 import { useGetCartQuery } from '../../../services/cart.service'
 
 interface ProductItemProps {

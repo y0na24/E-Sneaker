@@ -34,12 +34,12 @@ const baseQueryWithReauth = async (
 			const refreshResult = await baseQuery('/refresh', api, extraOptions)
 
 			if (refreshResult.data) {
-				const user = api.getState().auth.user
+				const data = api.getState().auth.user
 
 				api.dispatch(
 					authActions.setCredentials({
-						accessToken: refreshResult.data as string,
-						user,
+						token: refreshResult.data as string,
+						data,
 					})
 				)
 

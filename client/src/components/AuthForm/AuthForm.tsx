@@ -14,7 +14,7 @@ interface AuthFormProps {
 	submitForm: (inputFields: IInputFields) => void
 }
 
-const initialValue = {
+const initialValue: IInputFields = {
 	username: '',
 	password: '',
 }
