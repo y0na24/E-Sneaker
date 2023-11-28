@@ -2,7 +2,7 @@ import { Product } from './lib/models/product.interface'
 
 const productsData: Product[] = [
 	{
-		id: '1',
+		id: 1,
 		name: 'Дима',
 		image: 'https://loremflickr.com/640/480/cats',
 		description:
